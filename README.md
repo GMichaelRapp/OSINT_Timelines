@@ -26,7 +26,7 @@ Open `index.html` in any current browser, or use the hosted copy linked in this 
   - **Sources:** the same fields as the OSINT Citation Generator, including the 771-term description library, qualifiers, access notes, language notes, and an optional Admiralty rating. Its checks appear under the footnote.
   - **Threads:** the name, description, color, and order of each lane.
   - **Disputes & gaps:** what the sources disagree on, and what they don't cover.
-  - **Page:** the title, the line above it, the summary, the byline, the date compiled, and the license line.
+  - **Page:** the title, the line above it, the summary, the byline, the date compiled, an optional version tag with its own date and a one-line note on what changed, and the license line.
   - **Check:** every problem across the timeline. It finds events with no citation, citations to missing sources, citations with no locator, disputes pointing nowhere, and every check the Citation Generator would raise on a source.
 
 ### Dates

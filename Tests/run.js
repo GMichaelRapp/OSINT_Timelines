@@ -50,6 +50,17 @@ eq(r.fixes.length, 2, 'two repairs reported');
 eq(r.project.events[1].thread, r.project.threads[0].id, 'event with no thread gets the first thread');
 ok(TL.normalize({ nothing: true }, T.TEXT_KEYS).error, 'a file with no events is refused');
 
+// ---- 2b. Version tag, kept apart from the compiled date ----
+r = TL.normalize({ meta: { compiled: '2026-10-22', version: '1.1', versionDate: '2026-10-25', versionNote: 'Added October events' }, events: [] }, T.TEXT_KEYS);
+eq([r.project.meta.compiled, r.project.meta.version, r.project.meta.versionDate, r.project.meta.versionNote], ['2026-10-22', '1.1', '2026-10-25', 'Added October events'], 'version fields survive a round trip, separate from compiled');
+eq(TL.normalize({ events: [] }, T.TEXT_KEYS).project.meta.version, '', 'files without a version still open');
+eq(TL.versionLabel({ version: '1.1', versionDate: '2026-10-25' }), 'Version 1.1 · 25 Oct 2026', 'version label with date');
+eq(TL.versionLabel({ version: 'v2.0' }), 'Version 2.0', 'leading v is not doubled');
+eq(TL.versionLabel({ version: 'Version 3' }), 'Version 3', 'leading "Version" is not doubled');
+eq(TL.versionLabel({ versionDate: 'October 25, 2026' }), 'Version · 25 Oct 2026', 'date-only version');
+eq(TL.versionLabel({ version: 'draft 2', versionDate: 'spring' }), 'Version draft 2 · spring', 'free text kept as typed');
+eq(TL.versionLabel({ compiled: '2026-10-22' }), '', 'no version tag without version fields');
+
 // ---- 3. Footnotes come from the Citation Generator's formatter ----
 const court = { type: 'archival', authors: 'US District Court for the Southern District of New York', title: 'Opinion and Order', titleStyle: 'quotes',
   location: 'United States v. Ulbricht, No. 14-cr-68 (S.D.N.Y.)', descType: 'Court Opinion', descDetails: 'ECF No. 89', date: '2014-10-10',

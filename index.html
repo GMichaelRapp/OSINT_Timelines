@@ -74,6 +74,8 @@ select.theme { font-size: 12.5px; padding: 3px 6px; border: 1px solid var(--line
 .dek { max-width: 70ch; color: var(--muted); font-size: 16px; margin: 0 }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 18px; font-family: var(--font-mono); font-size: 12.5px; color: var(--muted) }
 .meta b { color: var(--ink); font-weight: 600 }
+.meta .vtag { border: 1px solid var(--line); border-radius: 999px; padding: 0 8px; color: var(--ink) }
+.foot .vline { margin: 0 0 6px }
 .overview { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px 6px; margin-block: 6px 16px }
 .overview h2 { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; font-weight: 500 }
 .ov-scroll { overflow-x: auto }
@@ -170,6 +172,7 @@ details.src[open] > summary::before { transform: rotate(90deg) }
 .li .warn { color: var(--fix) }
 .form { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: grid; gap: 14px; min-width: 0 }
 .form h2 { font-family: var(--font-read); font-size: 22px; margin: 0 }
+.form h3 { font-family: var(--font-read); font-size: 17px; margin: 18px 0 0 }
 .fgrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px }
 .field { display: grid; gap: 4px; min-width: 0; align-content: start }
 .field > span { font-size: 12.5px; font-weight: 600 }
@@ -1001,6 +1004,15 @@ var TL = (function () {
   }
   function levelOf(iso) { return !iso ? '' : iso.length === 10 ? 'day' : iso.length === 7 ? 'month' : 'year'; }
   function sortKey(iso) { return iso ? (iso + '-00-00').slice(0, 10) : '9999-99-99'; }
+  // A typed date shown the tool's way when it parses, or as typed when it does not.
+  function asDate(raw) { var n = normDate(raw || ''); return n ? showDate(n) : clean(raw); }
+  // The version tag, kept apart from the compiled date: "Version 1.1 · 25 Oct 2026".
+  function versionLabel(m) {
+    m = m || {};
+    var v = clean(m.version).replace(/^v(?:ersion)?\.?\s*(?=\d)/i, ''), d = asDate(m.versionDate);
+    if (!v && !d) return '';
+    return 'Version' + (v ? ' ' + v : '') + (d ? ' · ' + d : '');
+  }
   function showDate(iso) {
     if (!iso) return 'Undated';
     var p = iso.split('-'), y = String(+p[0]);
@@ -1028,7 +1040,7 @@ var TL = (function () {
   // ---- the project ----
   function blank() {
     return { app: 'OSINT Timeline Builder', format: FORMAT,
-      meta: { title: 'Untitled timeline', eyebrow: '', dek: '', byline: '', compiled: '', license: '' },
+      meta: { title: 'Untitled timeline', eyebrow: '', dek: '', byline: '', compiled: '', version: '', versionDate: '', versionNote: '', license: '' },
       threads: [{ id: 'main', name: 'Events', desc: '', color: 'blue' }], sources: [], events: [], disputes: [], gaps: [] };
   }
   // Reads anything that claims to be a project and returns a clean one plus a list of what was fixed.
@@ -1039,7 +1051,7 @@ var TL = (function () {
     if (!Array.isArray(raw.events)) return { error: 'That file holds no list of events. Use a project file saved from this tool, or a CSV.' };
     if (typeof raw.format === 'number' && raw.format > FORMAT) fixes.push('This file was saved by a newer version of the tool. Some parts may not show.');
     var m = raw.meta || {};
-    ['title', 'eyebrow', 'dek', 'byline', 'compiled', 'license'].forEach(function (k) { p.meta[k] = str(m[k], 2000); });
+    ['title', 'eyebrow', 'dek', 'byline', 'compiled', 'version', 'versionDate', 'versionNote', 'license'].forEach(function (k) { p.meta[k] = str(m[k], 2000); });
     if (!p.meta.title) p.meta.title = 'Untitled timeline';
     // threads
     p.threads = [];
@@ -1208,7 +1220,7 @@ var TL = (function () {
     return { rows: rows, unrated: unrated, sources: p.sources.length, events: p.events.length };
   }
 
-  return { FORMAT: FORMAT, PALETTE: PALETTE, COLOR_NAMES: COLOR_NAMES, MONTHS: MONTHS, normDate: normDate, levelOf: levelOf, sortKey: sortKey, showDate: showDate, precLabel: precLabel,
+  return { FORMAT: FORMAT, PALETTE: PALETTE, COLOR_NAMES: COLOR_NAMES, MONTHS: MONTHS, normDate: normDate, levelOf: levelOf, sortKey: sortKey, showDate: showDate, asDate: asDate, versionLabel: versionLabel, precLabel: precLabel,
     nextId: nextId, slug: slug, blank: blank, normalize: normalize, sortEvents: sortEvents, sourceState: sourceState, parseCSV: parseCSV, csvCell: csvCell, CSV_COLS: CSV_COLS,
     fromCSV: fromCSV, toCSV: toCSV, audit: audit };
 })();
@@ -1475,14 +1487,14 @@ var TL = (function () {
     var m = P.meta;
     $('view').innerHTML = '<div class="wrap gut"><header class="v-head">' + (m.eyebrow ? '<div class="eyebrow">' + esc(m.eyebrow) + '</div>' : '') +
       '<h1 class="v-title">' + esc(m.title) + '</h1>' + (m.dek ? '<p class="dek">' + esc(m.dek) + '</p>' : '') +
-      '<div class="meta"><span><b>' + P.events.length + '</b> dated entries</span><span><b>' + P.events.filter(function (e) { return e.key; }).length + '</b> headline events</span><span><b>' + Object.keys(nsrc).length + '</b> sources cited</span>' + (span ? '<span>' + span + '</span>' : '') + (m.byline ? '<span>' + esc(m.byline) + '</span>' : '') + (m.compiled ? '<span>Compiled ' + esc(TL.showDate(TL.normDate(m.compiled) || '') === 'Undated' ? m.compiled : TL.showDate(TL.normDate(m.compiled))) + '</span>' : '') + '</div></header>' +
+      '<div class="meta"><span><b>' + P.events.length + '</b> dated entries</span><span><b>' + P.events.filter(function (e) { return e.key; }).length + '</b> headline events</span><span><b>' + Object.keys(nsrc).length + '</b> sources cited</span>' + (span ? '<span>' + span + '</span>' : '') + (m.byline ? '<span>' + esc(m.byline) + '</span>' : '') + (m.compiled ? '<span>Compiled ' + esc(TL.showDate(TL.normDate(m.compiled) || '') === 'Undated' ? m.compiled : TL.showDate(TL.normDate(m.compiled))) + '</span>' : '') + (TL.versionLabel(m) ? '<span class="vtag"' + (m.versionNote ? ' title="' + esc(m.versionNote) + '"' : '') + '>' + esc(TL.versionLabel(m)) + '</span>' : '') + '</div></header>' +
       (P.events.length ? '<section class="overview" aria-label="Overview"><h2>Overview · each dot is an entry; large dots are headline events. Select a dot to jump to it.</h2><div class="ov-scroll"><svg class="lanes" id="lanes" role="img" aria-label="Events by thread over time"></svg></div></section>' : '') +
       '<div class="vbar" role="region" aria-label="Filters"><div class="row"><input id="vq" class="search" type="search" placeholder="Search events, people, sources, quotes" aria-label="Search" value="' + esc(ui.q) + '">' +
       '<button class="btn toggle" id="vkey" aria-pressed="' + ui.key + '">Headline events only</button><button class="btn toggle" id="vopen" aria-pressed="' + ui.open + '">Show all sources</button></div>' +
       '<div class="row" id="vchips">' + P.threads.map(function (t) { return '<button class="chip" data-t="' + esc(t.id) + '" style="--c:' + colorVar(t) + '" aria-pressed="' + !!ui.threads[t.id] + '"><span class="sw"></span>' + esc(t.name) + ' <span class="n">' + P.events.filter(function (e) { return e.thread === t.id; }).length + '</span></button>'; }).join('') + '<span class="count" id="vcount"></span></div>' +
       (rated ? '<div class="row" id="vzones"><span class="hint">Source rating:</span>' + ['G', 'Y', 'O', 'R', 'X', 'U'].map(function (z) { return '<button class="chip zone" data-z="' + z + '" style="--zc:' + (ZC[z] || 'transparent') + '" aria-pressed="' + ui.zones[z] + '"><span class="sw"></span>' + ZN[z] + '</button>'; }).join('') + '</div>' : '') +
       '</div><div class="vgrid"><main id="ledger" aria-live="polite"></main><aside class="side">' + sideHTML(rated) + '</aside></div>' +
-      '<footer class="foot">' + (m.license ? esc(m.license) + ' · ' : '') + 'Citations follow the <a href="https://gmichaelrapp.github.io/OSINT_Cites/" target="_blank" rel="noopener">OSINT Style Guide</a>. Made with the <a href="' + TOOL_URL + '" target="_blank" rel="noopener">OSINT Timeline Builder</a>.</footer></div>';
+      '<footer class="foot">' + (TL.versionLabel(m) ? '<p class="vline"><b>' + esc(TL.versionLabel(m)) + '</b>' + (m.versionNote ? '. ' + esc(m.versionNote) : '') + '</p>' : '') + (m.license ? esc(m.license) + ' · ' : '') + 'Citations follow the <a href="https://gmichaelrapp.github.io/OSINT_Cites/" target="_blank" rel="noopener">OSINT Style Guide</a>. Made with the <a href="' + TOOL_URL + '" target="_blank" rel="noopener">OSINT Timeline Builder</a>.</footer></div>';
     lanes(); ledger();
   }
   function sideHTML(rated) {
@@ -1796,8 +1808,12 @@ var TL = (function () {
   function edPage() {
     var m = P.meta, f = function (k, l, ph, help, area) { return '<label class="field wide"><span>' + l + '</span>' + (area ? '<textarea data-mf="' + k + '" rows="3" placeholder="' + esc(ph) + '">' + esc(m[k]) + '</textarea>' : '<input data-mf="' + k + '" value="' + esc(m[k]) + '" placeholder="' + esc(ph) + '">') + (help ? '<small>' + help + '</small>' : '') + '</label>'; };
     $('epane').innerHTML = '<div class="form" style="margin-block:16px 60px"><h2>Page</h2>' + f('title', 'Title', 'Silk Road Takedown Timeline', 'The name of the page. Also the browser tab title of an exported page.') + f('eyebrow', 'Line above the title', 'Case file · United States v. Ulbricht') + f('dek', 'Summary', 'One or two sentences on what the timeline covers and what it is built from', '', true) +
-      '<div class="fgrid">' + f('byline', 'Byline', 'Your name or outlet') + f('compiled', 'Compiled on', '2026-10-22') + '</div>' + f('license', 'License or credit line', 'CC BY 4.0', 'Shown in the footer of the published page.') + '</div>';
+      '<div class="fgrid">' + f('byline', 'Byline', 'Your name or outlet') + f('compiled', 'Compiled on', '2026-10-22', 'When the timeline was first put together.') + '</div>' +
+      '<h3>Version</h3><p class="hint">Optional. Kept apart from the compiled date, so readers can tell which revision they are looking at. Shown beside the title and in the footer.</p>' +
+      '<div class="fgrid">' + f('version', 'Version', '1.1') + '<label class="field wide"><span>Version date</span><input data-mf="versionDate" value="' + esc(m.versionDate) + '" placeholder="2026-10-25"><small><button class="btn small" type="button" id="vtoday">Today</button></small></label></div>' +
+      f('versionNote', 'What changed', 'Added the October 2026 Starshield events', 'One line. Shown in the footer, and when a reader points at the version tag.') + f('license', 'License or credit line', 'CC BY 4.0', 'Shown in the footer of the published page.') + '</div>';
   }
+  document.addEventListener('click', function (ev) { if (ev.target.id !== 'vtoday') return; var t = new Date(), z = function (n) { return (n < 10 ? '0' : '') + n; }; P.meta.versionDate = t.getFullYear() + '-' + z(t.getMonth() + 1) + '-' + z(t.getDate()); touch(); edPage(); });
   document.addEventListener('input', function (ev) { var k = ev.target.dataset && ev.target.dataset.mf; if (!k) return; P.meta[k] = ev.target.value; if (k === 'title') document.title = ev.target.value + ' · OSINT Timeline Builder'; touch(); });
 
   // --- check ---

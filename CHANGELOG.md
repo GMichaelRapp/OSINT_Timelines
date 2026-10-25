@@ -2,6 +2,12 @@
 
 Changes to the OSINT Timeline Builder, newest first.
 
+## 1.1 — 25 October 2026
+
+- **Version tag:** each timeline can carry a version label, a version date, and a one-line note on what changed, kept separate from the compiled date. The tag shows beside the title and in the footer of the viewer and of exported pages, with the note shown when a reader points at the tag. Set it under **Edit → Page**; a **Today** button fills in the version date.
+- Files saved by 1.0 open unchanged; the version fields are optional. The file format stays at 1.
+- `timeline-spec.md` tells AI assistants how to fill in and raise the version.
+
 ## 1.0 — 22 October 2026
 
 First release.

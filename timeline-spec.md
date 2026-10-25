@@ -30,6 +30,9 @@ A timeline file is JSON:
     "dek": "One or two sentences on what the timeline covers and what it is built from.",
     "byline": "",
     "compiled": "2026-10-22",
+    "version": "1.0",
+    "versionDate": "2026-10-22",
+    "versionNote": "",
     "license": ""
   },
   "threads": [
@@ -77,6 +80,18 @@ A timeline file is JSON:
 ```
 
 The values above are placeholders that show the form. Replace every one of them with what your documents say.
+
+## Page details
+
+`compiled` is the date the timeline was first put together. The three version fields are optional and are kept separate from it, so a reader can tell which revision of a published timeline they are reading:
+
+| Field | Holds |
+|---|---|
+| `version` | A short label such as `1.0` or `1.1` |
+| `versionDate` | The date of this version, `YYYY-MM-DD` |
+| `versionNote` | One line on what changed in this version |
+
+For a new timeline, use `1.0` and set `versionDate` to the same day as `compiled`. When you revise a timeline someone gave you, raise the version, set `versionDate` to the day of the revision, say what changed in `versionNote`, and leave `compiled` as it was.
 
 ## Events
 
