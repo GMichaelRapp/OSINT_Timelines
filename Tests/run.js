@@ -106,7 +106,42 @@ ok(msgs.some((m) => /^fix: Event e1 has no citation/.test(m)), 'flags an event w
 ok(msgs.some((m) => /^fix: Event e2 cites nope/.test(m)), 'flags a citation to a missing source');
 ok(msgs.some((m) => /^fix: Dispute "d" points to e9/.test(m)), 'flags a dispute pointing nowhere');
 
-// ---- 7. The page carries a readable starting timeline ----
+// ---- 7. Media ----
+eq(TL.videoLink('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=1m5s'), { host: 'youtube', id: 'dQw4w9WgXcQ', start: 65, label: 'YouTube' }, 'YouTube link with a start time');
+eq(TL.videoLink('https://youtu.be/dQw4w9WgXcQ').id, 'dQw4w9WgXcQ', 'YouTube short link');
+eq([TL.videoLink('https://vimeo.com/76979871/abc123def').id, TL.videoLink('https://vimeo.com/76979871/abc123def').hash], ['76979871', 'abc123def'], 'Vimeo link with a private hash');
+eq(TL.videoLink('media/clip.mp4').host, 'file', 'a video file next to the page');
+eq(TL.videoLink('https://example.org/page'), null, 'a page is not a video');
+eq(TL.audioLink('media/call.mp3').url, 'media/call.mp3', 'a sound file next to the page');
+eq(TL.embedLink('https://www.datawrapper.de/_/AbC12/').url, 'https://datawrapper.dwcdn.net/AbC12/', 'Datawrapper link becomes its embed');
+eq(TL.embedLink('http://example.org'), null, 'embeds need https');
+[['75', 75], ['1:15', 75], ['1:02:03', 3723], ['1m15s', 75], ['soon', null]].forEach(([v, w]) => eq(TL.parseTime(v), w, 'time ' + v));
+eq(['https://x.org/a.jpg', 'media/a.jpg', 'javascript:alert(1)', '../secret.jpg', '/abs.jpg', '//x.org/a.jpg', 'data:text/html;base64,AAAA'].map((u) => TL.mediaSrc(u, '')), ['https://x.org/a.jpg', 'media/a.jpg', '', '', '', '', ''], 'only safe picture addresses are kept');
+const bigPic = 'data:image/jpeg;base64,' + 'A'.repeat(300000);
+eq(TL.mediaSrc(bigPic, '').length, bigPic.length, 'pictures kept inside the timeline are not cut short');
+eq(TL.mediaSrc(bigPic, 'av'), '', 'video and sound are never kept inside the timeline');
+
+// ---- 8. The background ----
+const bgText = 'Opens [^b1] and [@s2, p. 4] and links [[e3|the arrest]].\n\n{{m1}}\n\nAgain [^b1], then [^b9].';
+eq(TL.bgRefs(bgText).map((r) => r.type + ':' + (r.id || r.src)), ['cite:b1', 'cite:s2', 'event:e3', 'media:m1', 'cite:b1', 'cite:b9'], 'background markers are found in order');
+eq(TL.bgNotes({ text: bgText, cites: [{ id: 'b1', src: 's1', loc: 'p. 1' }] }).num, { b1: 1, '@s2|p. 4': 2, b9: 3 }, 'notes are numbered as a reader meets them; a repeat keeps its number');
+const v1 = TL.normalize({ format: 1, events: [{ id: 'e1', date: '2013', text: 'x', cites: [] }] }, T.TEXT_KEYS).project;
+eq([v1.background.text, v1.background.cites.length, v1.events[0].media.length], ['', 0, 0], 'format 1 files open with an empty background and no media');
+const withBg = TL.normalize({ format: 2, sources: [{ id: 's1', fields: { type: 'web', title: 'T', descType: 'Web Page', url: 'https://x.org' } }],
+  background: { text: bgText + '\n\nA paragraph long enough to make several claims that a careful reader would want to check against a source.', cites: [{ id: 'b1', src: 's1', loc: 'p. 1' }, { id: 'b2', src: 's1', loc: '' }], media: [{ id: 'm1', kind: 'image', src: 'media/a.jpg', credit: 'Someone' }] },
+  events: [{ id: 'e1', date: '2013', text: 'x', cites: [{ src: 's1', loc: 'p. 2' }], media: [{ kind: 'video', src: 'https://example.org/nope' }, { kind: 'compare', src: 'https://x.org/a.jpg', alt: 'a', cite: { src: 's1' } }] }] }, T.TEXT_KEYS).project;
+const bm = TL.audit(withBg, O, T.TYPES, T.TEXT_KEYS).rows.map((x) => x.level + ': ' + x.msg);
+ok(bm.some((m) => /^fix: The background cites s2, which is not in the source list/.test(m)), 'flags a direct citation to a missing source');
+ok(bm.some((m) => /^fix: The background links to \[\[e3\]\]/.test(m)), 'flags a link to a missing event');
+ok(bm.some((m) => /^fix: The background cites \[\^b9\]/.test(m)), 'flags a marker with no citation behind it');
+ok(bm.some((m) => /^check: Background citation b2 is not placed/.test(m)), 'flags a citation never placed in the text');
+ok(bm.some((m) => /^check: Background paragraph 3 .* has no citation/.test(m)), 'flags a long paragraph with no citation');
+ok(bm.some((m) => /^check: The background, picture m1 credits its maker but cites no source/.test(m)), 'a credit without a source is a check');
+ok(bm.some((m) => /^fix: Event e1, video m1: the link is not one the tool can play/.test(m)), 'flags a video link it cannot play');
+ok(bm.some((m) => /^fix: Event e1, before-and-after m2 has no pair of pictures/.test(m)), 'flags a before-and-after missing a picture');
+ok(!bm.some((m) => /Source s1 is not cited/.test(m)), 'background and media citations count as uses');
+
+// ---- 9. The page carries a readable starting timeline ----
 const boot = JSON.parse(html.match(/<script type="application\/json" id="tl-data">([\s\S]*?)<\/script>/)[1]);
 eq(boot.mode, 'builder', 'page starts in builder mode');
 ok(TL.normalize(boot.project, T.TEXT_KEYS).project.events.length > 0, 'page ships with a sample timeline');

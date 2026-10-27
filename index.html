@@ -220,6 +220,117 @@ legend { font-size: 12.5px; font-weight: 600; padding: 0 4px }
 .toast { position: fixed; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 8px 14px; border-radius: 6px; font-size: 13.5px; z-index: 60; max-width: calc(100% - 32px) }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important } }
 @media print { .appbar, .vbar, .side, .overview { display: none } }
+
+/* ---------- the background ---------- */
+.bg { max-width: 780px; margin: 4px 0 22px; position: relative; scroll-margin-top: calc(var(--appbar-h, 46px) + 12px) }
+.bg-h { font-family: var(--font-read); font-size: clamp(22px, 2.6vw, 28px); font-weight: 600; margin: 6px 0 8px; letter-spacing: -.01em }
+.prose { font-family: var(--font-read); font-size: 17px; line-height: 1.6; overflow-wrap: break-word }
+.prose > :first-child { margin-top: 0 }
+.prose p, .prose ul, .prose ol, .prose blockquote { margin: 0 0 14px }
+.prose h3, .prose h4, .prose h5 { font-family: var(--font-read); margin: 22px 0 8px; line-height: 1.25 }
+.prose h3 { font-size: 21px } .prose h4 { font-size: 18px } .prose h5 { font-size: 16px }
+.prose blockquote { border-left: 3px solid var(--line); padding-left: 14px; color: var(--muted); font-style: italic }
+.prose hr { border: 0; border-top: 1px solid var(--line); margin: 20px 0 }
+.prose ul, .prose ol { padding-left: 22px }
+.prose li { margin-bottom: 4px }
+.prose .mfig { margin: 6px 0 18px; font-family: var(--font-ui) }
+.prose .flash, .bg-notes .flash { background: var(--hi); border-radius: 3px; transition: background .4s }
+.fnref { font-family: var(--font-ui); font-size: 11px; line-height: 0; margin-left: 1px; vertical-align: super }
+.fnsep { color: var(--muted); margin-right: 1px }
+.fnref a { text-decoration: none; font-weight: 600; padding: 0 2px; border-radius: 3px; color: var(--accent) }
+.fnref a:hover, .fnref a:focus-visible { background: var(--accent-soft) }
+.fnref.broken, .broken { color: var(--fix) }
+a.evlink { color: inherit; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px }
+a.evlink:hover { color: var(--accent) }
+.bg-notes { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 12px }
+.bg-notes h3 { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); margin: 0 0 8px; font-weight: 500 }
+.bg-notes ol { margin: 0; padding-left: 26px; display: grid; gap: 10px }
+.bg-notes li { scroll-margin-top: 160px; padding: 2px 4px; margin-left: -4px } .bg-notes li::marker { font: 600 12px var(--font-mono); color: var(--muted) }
+.bg-notes .fn { font-size: 14px }
+.bg-notes blockquote { margin: 6px 0 0; font-family: var(--font-read); font-style: italic; font-size: 14px; border-left: 2px solid var(--line); padding-left: 9px }
+.bg-notes .cnote { font-size: 12.5px; color: var(--muted); margin-top: 4px }
+.bg-notes .bk { text-decoration: none; margin-left: 4px; font-family: var(--font-ui); font-size: 13px }
+.bg.shut .bg-body { max-height: 24em; overflow: hidden; -webkit-mask-image: linear-gradient(180deg, #000 60%, transparent); mask-image: linear-gradient(180deg, #000 60%, transparent) }
+.bg-more { margin-top: 8px }
+.fnpop { position: absolute; z-index: 40; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,.2); padding: 10px 12px 12px; display: grid; gap: 6px; max-height: 60vh; overflow: auto }
+.fnpop-h { display: flex; align-items: center; gap: 8px; font-size: 12.5px } .fnpop-h b { flex: 1 }
+.fnpop-x { border: 0; background: none; font-size: 20px; line-height: 1; cursor: pointer; color: var(--muted); padding: 0 4px }
+.fnpop .fn { font-size: 14px } .fnpop blockquote { margin: 0; font-family: var(--font-read); font-style: italic; font-size: 13.5px; border-left: 2px solid var(--line); padding-left: 9px } .fnpop .cnote { font-size: 12.5px; color: var(--muted) }
+
+/* ---------- media ---------- */
+.mfig { margin: 0; display: grid; gap: 6px; min-width: 0 }
+.mfig figcaption { font-size: 12.5px; color: var(--muted); line-height: 1.45; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; font-family: var(--font-ui) }
+.mfig figcaption .mcap { color: var(--ink); flex-basis: 100% } .mfig figcaption .mlead { color: var(--ink) }
+.mmeta .cr { font-style: italic } .mmeta i { font-style: normal; color: var(--faint) }
+.mopen { color: var(--accent); font-size: 12.5px }
+details.msrc { flex-basis: 100% } details.msrc > summary { cursor: pointer; color: var(--accent); font-size: 12.5px; width: fit-content }
+details.msrc .fn { margin-top: 4px; padding: 6px 9px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; font-size: 13.5px; color: var(--ink) }
+.mzoom { display: block; width: 100%; padding: 0; border: 0; background: var(--sheet); cursor: zoom-in; border-radius: 6px; overflow: hidden }
+.mzoom img { display: block; width: 100%; height: auto; max-height: 460px; object-fit: contain }
+.mzoom:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px }
+.mempty { font-size: 13px; color: var(--muted); padding: 14px; border: 1px dashed var(--line); border-radius: 8px }
+.evmedia { display: grid; gap: 12px; margin-top: 10px; max-width: 620px; grid-template-columns: minmax(0, 1fr) }
+.evmedia.many { grid-template-columns: repeat(2, minmax(0, 1fr)) }
+.evmedia.many .k-image .mzoom { aspect-ratio: 4 / 3 } .evmedia.many .k-image .mzoom img { height: 100%; max-height: none; object-fit: cover }
+.evmedia.many > :not(.k-image) { grid-column: 1 / -1 }
+@media (max-width: 480px) { .evmedia.many { grid-template-columns: minmax(0, 1fr) } }
+.mcmp { position: relative; overflow: hidden; border-radius: 6px; background: var(--sheet); user-select: none; touch-action: pan-y }
+.mcmp img { display: block; width: 100%; height: auto; pointer-events: none }
+.mcmp .cmp-a { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--x, 50%)) 0 0) } .mcmp .cmp-a img { width: 100%; height: 100%; object-fit: cover }
+.cmp-line { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 0 1px rgba(0,0,0,.25); pointer-events: none }
+.cmp-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 34px; height: 34px; border-radius: 50%; background: #fff; color: #13222C; display: grid; place-items: center; font-size: 12px; letter-spacing: -1px; box-shadow: 0 1px 4px rgba(0,0,0,.35) }
+.cmp-l { position: absolute; top: 8px; padding: 3px 8px; border-radius: 4px; background: rgba(6,12,18,.68); color: #fff; font: 600 11.5px var(--font-ui); pointer-events: none; max-width: 45% }
+.cmp-l.l { left: 8px } .cmp-l.r { right: 8px }
+.cmp-range { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: ew-resize; -webkit-appearance: none; appearance: none }
+.mcmp:focus-within .cmp-knob { outline: 3px solid var(--accent); outline-offset: 2px }
+.mplay { position: relative; background: #0b1218; border-radius: 6px; overflow: hidden; width: 100%; aspect-ratio: 16 / 9 }
+.mplay iframe, .mplay video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; background: #000 }
+.mplay.membed { background: var(--sheet); aspect-ratio: auto } .mplay.membed iframe { background: var(--surface) }
+.k-audio audio { width: 100%; display: block }
+.k-audio.has-art { grid-template-columns: 84px minmax(0, 1fr); column-gap: 12px; align-items: center } .k-audio.has-art .art { width: 84px; height: 84px; object-fit: cover; border-radius: 8px; grid-row: span 2 } .k-audio.has-art figcaption { grid-column: 2 }
+.mface { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 16px; cursor: pointer; color: #fff; background: radial-gradient(ellipse at 50% 40%, #24323c, #0b1218 75%); display: grid; place-content: center; justify-items: center; gap: 8px; text-align: center; font: inherit }
+.mface .poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .72 }
+.mface .mplaybtn { position: relative; width: 60px; height: 60px; border-radius: 50%; background: rgba(255,255,255,.94); box-shadow: 0 2px 10px rgba(0,0,0,.4) }
+.mface .mplaybtn::after { content: ""; position: absolute; left: 24px; top: 18px; border-left: 18px solid #13222C; border-top: 12px solid transparent; border-bottom: 12px solid transparent }
+.mface:hover .mplaybtn, .mface:focus-visible .mplaybtn { transform: scale(1.06); background: #fff }
+.mface:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px }
+.mface-t { position: relative; font-weight: 600; font-size: 15px; text-shadow: 0 1px 3px rgba(0,0,0,.6); max-width: 46ch }
+.mface-n { position: relative; font-size: 11.5px; opacity: .85; text-shadow: 0 1px 3px rgba(0,0,0,.6); max-width: 46ch }
+.membed .mface { color: var(--ink); background: repeating-linear-gradient(135deg, var(--sheet) 0 12px, var(--surface) 12px 24px); border: 1px dashed var(--line); border-radius: 6px }
+.membed .mface-t, .membed .mface-n { text-shadow: none } .membed .mplaybtn { background: var(--accent) } .membed .mplaybtn::after { border-left-color: var(--accent-ink) }
+.badge.mb { color: var(--accent); border-color: var(--accent-soft); background: var(--accent-soft) }
+.mlb { position: fixed; inset: 0; z-index: 60; background: rgba(4, 9, 13, .92); display: grid; place-items: center; padding: 48px 56px 24px }
+.mlb figure { margin: 0; display: grid; gap: 10px; max-width: 100%; max-height: 100%; justify-items: center }
+.mlb img { max-width: 100%; max-height: calc(100vh - 150px); object-fit: contain; display: block; border-radius: 4px }
+.mlb figcaption { color: rgba(255,255,255,.82); font-size: 13.5px; max-width: 80ch; display: flex; flex-wrap: wrap; gap: 2px 10px; justify-content: center; text-align: center }
+.mlb figcaption .mcap, .mlb figcaption .mlead { color: #fff } .mlb .mmeta i { color: rgba(255,255,255,.5) } .mlb details.msrc { display: none }
+.mlb button { position: absolute; border: 0; background: rgba(255,255,255,.12); color: #fff; width: 42px; height: 42px; border-radius: 50%; font-size: 26px; line-height: 1; cursor: pointer }
+.mlb button:hover, .mlb button:focus-visible { background: rgba(255,255,255,.26) }
+.mlb-x { top: 10px; right: 12px } .mlb-p { left: 8px; top: 50%; margin-top: -21px } .mlb-n { right: 8px; top: 50%; margin-top: -21px }
+@media (max-width: 620px) { .mlb { padding: 52px 8px 16px } .mlb-p, .mlb-n { top: auto; bottom: 10px } .prose { font-size: 16px } }
+@media print { .mface-n, .cmp-range, .bg-more, .fnpop, .mlb { display: none } .bg.shut .bg-body { max-height: none; -webkit-mask-image: none; mask-image: none } }
+
+/* ---------- editing the background and media ---------- */
+.bged { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 20px; padding-block: 16px 60px; align-items: start }
+.bgprev-col { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--appbar-h, 46px) + 10px); max-height: calc(100vh - 90px); overflow: auto; min-width: 0 }
+.bgprev { background: var(--bg); border: 1px dashed var(--line); border-radius: 8px; padding: 6px 16px 14px }
+.bgprev .bg { margin: 0 } .bgprev .prose { font-size: 16px }
+@media (max-width: 1000px) { .bged { grid-template-columns: minmax(0, 1fr) } .bgprev-col { position: static; max-height: none } }
+.mdbar { display: flex; flex-wrap: wrap; gap: 4px; align-items: center; padding: 4px 0 2px }
+.mdbar .sep { width: 1px; height: 20px; background: var(--line); margin: 0 4px }
+#bgText { min-height: 340px; font: 14px/1.55 var(--font-mono); resize: vertical }
+.citeed .top.bgtop { grid-template-columns: auto minmax(0, 1fr) 150px auto }
+@media (max-width: 700px) { .citeed .top.bgtop { grid-template-columns: minmax(0, 1fr) } }
+.mid { font: 12px var(--font-mono); background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 2px 6px; white-space: nowrap; align-self: center }
+.mitems { display: grid; gap: 10px }
+.mitem { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; background: var(--sheet); display: grid; gap: 8px }
+.mi-head { display: flex; gap: 6px; align-items: center; flex-wrap: wrap } .mi-head .sp { flex: 1 }
+.mi-head select { padding: 4px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); font-weight: 600; font-size: 13px }
+.mthumbs { display: flex; gap: 8px } .thumb { width: 120px; height: 80px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); background: var(--surface) }
+.row.nowrap { flex-wrap: nowrap } .grow { flex: 1; min-width: 0 }
+.mlocal { color: var(--check) !important } .mlocal code { font-size: 11.5px }
+input.bad { border-color: var(--fix) !important; box-shadow: 0 0 0 1px var(--fix) }
+#mprev { margin-top: 6px } #mprev .evmedia { margin-top: 0 }
 </style>
 </head>
 <body>
@@ -962,7 +1073,7 @@ var OSINT_TABLES = (function () {
 // OSINT Timeline Builder: the data model, with no page code. Tests/run.js loads this block on its own.
 var TL = (function () {
   'use strict';
-  var FORMAT = 1;
+  var FORMAT = 2;
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   var PREC = { exact: 'exact', month: 'month', year: 'year', approx: 'approx.', range: 'range' };
   // Thread colors. Each has a light-theme and a dark-theme value; both read on their own background.
@@ -1028,6 +1139,98 @@ var TL = (function () {
     return e.prec;
   }
 
+  // ---- media (shared with the OSINT Dashboard Builder) ----
+  // Where a picture, video or sound may come from: a web address, a picture kept inside the timeline, or a file next to the page.
+  var MEDIA_KINDS = ['image', 'compare', 'video', 'audio', 'embed'];
+  function relPath(u) { return /^(?![a-z][a-z0-9+.-]*:)(?!\/\/)(?!.*(^|\/)\.\.(\/|$))[\w\-./ %()~+]+$/i.test(u) && !/^\//.test(u) && /\.[a-z0-9]{2,5}$/i.test(u); }
+  function mediaSrc(u, kind) {
+    u = typeof u === 'string' ? u.trim() : ''; if (!u) return '';
+    if (/^data:/i.test(u)) return kind !== 'av' && u.length < 16e6 && /^data:image\/(png|jpe?g|gif|webp);base64,[a-z0-9+\/=]+$/i.test(u) ? u : '';
+    if (u.length > 2000) return '';
+    if (/^https:\/\/[^\s"'<>]+$/i.test(u)) return u;
+    if (/^http:\/\/[^\s"'<>]+$/i.test(u)) return 'https://' + u.slice(7);
+    return relPath(u) ? u : '';
+  }
+  function isLocal(u) { return !!u && relPath(u); }
+  // times as people type them: 75, 1:15, 1:02:03, 1m15s, 1h2m
+  function parseTime(v) {
+    if (typeof v === 'number') return isFinite(v) && v >= 0 ? Math.floor(v) : null;
+    v = clean(v).toLowerCase(); if (!v) return null; var m;
+    if (/^\d+(\.\d+)?$/.test(v)) return Math.floor(+v);
+    if ((m = /^(?:(\d+):)?(\d{1,2}):(\d{1,2})$/.exec(v))) return (+(m[1] || 0)) * 3600 + +m[2] * 60 + +m[3];
+    if ((m = /^(?:(\d+)h)?\s*(?:(\d+)m)?\s*(?:(\d+)s)?$/.exec(v)) && (m[1] || m[2] || m[3])) return (+(m[1] || 0)) * 3600 + (+(m[2] || 0)) * 60 + +(m[3] || 0);
+    return null;
+  }
+  function fmtTime(t) { t = Math.max(0, Math.floor(+t || 0)); var h = Math.floor(t / 3600), m = Math.floor(t % 3600 / 60), s2 = t % 60; return (h ? h + ':' + pad(m) : m) + ':' + pad(s2); }
+  // A video link, read as YouTube, Vimeo, the Internet Archive, or a file to play directly.
+  function videoLink(u) {
+    u = clean(u); if (!u) return null; var m, t = null, q;
+    q = /[?&#](?:t|start)=([0-9hms:]+)/i.exec(u); if (q) t = parseTime(q[1]);
+    if ((m = /^https?:\/\/(?:www\.|m\.|music\.)?(?:youtube\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/|live\/|v\/)|youtube-nocookie\.com\/embed\/|youtu\.be\/)([\w-]{11})/i.exec(u))) return { host: 'youtube', id: m[1], start: t, label: 'YouTube' };
+    if ((m = /^https?:\/\/(?:www\.|player\.)?vimeo\.com\/(?:video\/|channels\/[\w-]+\/|groups\/[\w-]+\/videos\/)?(\d{5,12})(?:\/([0-9a-f]{6,20}))?/i.exec(u))) { var hq = /[?&]h=([0-9a-f]{6,20})/i.exec(u); return { host: 'vimeo', id: m[1], hash: m[2] || (hq && hq[1]) || '', start: t, label: 'Vimeo' }; }
+    if ((m = /^https?:\/\/(?:www\.)?archive\.org\/(?:details|embed)\/([\w.\-]+(?:\/[\w.\-%]+)?)/i.exec(u))) return { host: 'archive', id: m[1], start: t, label: 'the Internet Archive' };
+    var f = mediaSrc(u, 'av'); if (f && /\.(mp4|m4v|webm|ogv|mov)(\?.*)?$/i.test(f)) return { host: 'file', url: f, start: t, label: isLocal(f) ? 'a file next to this page' : 'a video file' };
+    return null;
+  }
+  function audioLink(u) { var f = mediaSrc(u, 'av'); return f && /\.(mp3|m4a|aac|ogg|oga|opus|wav|flac|weba)(\?.*)?$/i.test(f) ? { host: 'file', url: f, label: isLocal(f) ? 'a file next to this page' : 'a sound file' } : null; }
+  // The address that goes in the frame, for pages that offer an embed. Share links from common services become their embed addresses.
+  function embedLink(u) {
+    u = clean(u); if (!/^https:\/\/[^\s"'<>]+$/i.test(u)) return null; var m, host = u.replace(/^https:\/\/(www\.)?/i, '').split(/[\/?#]/)[0].toLowerCase();
+    var v = videoLink(u); if (v && v.host !== 'file') return { url: '', video: v, host: host, label: v.label };
+    if ((m = /^https:\/\/open\.spotify\.com\/(?:embed\/)?(episode|show|track|album|playlist)\/(\w+)/i.exec(u))) return { url: 'https://open.spotify.com/embed/' + m[1] + '/' + m[2], host: host, label: 'Spotify', h: m[1] === 'track' || m[1] === 'episode' ? 232 : 352 };
+    if ((m = /^https:\/\/(?:public\.)?flourish\.studio\/(visualisation|story)\/(\d+)/i.exec(u))) return { url: 'https://flo.uri.sh/' + m[1] + '/' + m[2] + '/embed', host: host, label: 'Flourish' };
+    if ((m = /^https:\/\/(?:www\.)?datawrapper\.de\/_\/(\w+)/i.exec(u))) return { url: 'https://datawrapper.dwcdn.net/' + m[1] + '/', host: host, label: 'Datawrapper' };
+    if (/^datawrapper\.dwcdn\.net$/.test(host)) return { url: u, host: host, label: 'Datawrapper' };
+    if ((m = /^https:\/\/soundcloud\.com\/[\w-]+\/[\w-]+/i.exec(u))) return { url: 'https://w.soundcloud.com/player/?url=' + encodeURIComponent(m[0]) + '&visual=false', host: host, label: 'SoundCloud', h: 166 };
+    if (/^https:\/\/(?:www\.)?google\.[a-z.]+\/maps\/embed/i.test(u)) return { url: u, host: host, label: 'Google Maps' };
+    if ((m = /^https:\/\/docs\.google\.com\/(spreadsheets|presentation|document)\/d\/e\/([\w-]+)\/pub/i.exec(u))) return { url: u.replace(/\/pub(?:html)?(\?.*)?$/, m[1] === 'presentation' ? '/embed' : '/pubhtml?widget=true&headers=false'), host: host, label: 'Google ' + { spreadsheets: 'Sheets', presentation: 'Slides', document: 'Docs' }[m[1]] };
+    return { url: u, host: host, label: host };
+  }
+  function mediaItem(it, id) {
+    it = it && typeof it === 'object' ? it : {};
+    var kind = MEDIA_KINDS.indexOf(it.kind) >= 0 ? it.kind : 'image', av = kind === 'video' || kind === 'audio', c = it.cite && typeof it.cite === 'object' ? it.cite : {};
+    return { id: clean(it.id) || id || '', kind: kind, src: mediaSrc(it.src, av ? 'av' : '') || (kind === 'embed' ? str(it.src, 2000).trim() : ''), src2: kind === 'compare' ? mediaSrc(it.src2, '') : '',
+      alt: str(it.alt, 1000), cap: str(it.cap, 2000), credit: str(it.credit, 400), date: str(it.date, 60), place: str(it.place, 300),
+      label: str(it.label, 120), label2: str(it.label2, 120), poster: mediaSrc(it.poster, ''), start: parseTime(it.start), height: +it.height >= 120 && +it.height <= 1600 ? Math.round(+it.height) : '',
+      cite: { src: clean(c.src), loc: str(c.loc, 400) } };
+  }
+  function mediaList(a, prefix) {
+    var seen = {};
+    return (Array.isArray(a) ? a : []).slice(0, 40).filter(function (x) { return x && typeof x === 'object'; }).map(function (x) {
+      var m = mediaItem(x); if (!m.id || seen[m.id]) m.id = nextId(prefix, Object.keys(seen)); seen[m.id] = 1; return m;
+    });
+  }
+
+  // ---- the background: Markdown with citation markers ----
+  // [^b1] points to a citation in background.cites; [@s3, p. 5] cites a source directly; [[e12]] or [[e12|the arrest]] links an event;
+  // a line holding only {{m1}} places a picture or video from background.media.
+  var RE_CITE = /\[\^([\w.-]{1,40})\]/g, RE_SRC = /\[@([\w.-]{1,40})(?:\s*,\s*([^\]\n]{1,200}))?\]/g, RE_EV = /\[\[([\w.-]{1,40})(?:\|([^\]\n]{1,200}))?\]\]/g, RE_MEDIA = /^\s*\{\{([\w.-]{1,40})\}\}\s*$/;
+  function bgRefs(text) {
+    var out = [], all = /\[\^([\w.-]{1,40})\]|\[@([\w.-]{1,40})(?:\s*,\s*([^\]\n]{1,200}))?\]|\[\[([\w.-]{1,40})(?:\|([^\]\n]{1,200}))?\]\]/g, m;
+    String(text || '').split('\n').forEach(function (line) {
+      var mm = RE_MEDIA.exec(line); if (mm) { out.push({ type: 'media', id: mm[1] }); return; }
+      all.lastIndex = 0;
+      while ((m = all.exec(line))) {
+        if (m[1]) out.push({ type: 'cite', id: m[1], key: m[1] });
+        else if (m[2]) out.push({ type: 'cite', src: m[2], loc: clean(m[3]), key: '@' + m[2] + '|' + clean(m[3]) });
+        else out.push({ type: 'event', id: m[4], label: m[5] || '' });
+      }
+    });
+    return out;
+  }
+  // Numbers the background's citations in the order a reader meets them; a citation used twice keeps its first number.
+  function bgNotes(bg) {
+    var byId = {}, order = [], num = {};
+    (bg.cites || []).forEach(function (c) { byId[c.id] = c; });
+    bgRefs(bg.text).forEach(function (r) {
+      if (r.type !== 'cite' || num[r.key]) return;
+      var c = r.src ? { id: '', src: r.src, loc: r.loc, quote: '', note: '' } : byId[r.id];
+      order.push({ key: r.key, c: c || null, id: r.id || '' }); num[r.key] = order.length;
+    });
+    return { order: order, num: num };
+  }
+  function blankBackground() { return { title: 'Background', text: '', display: 'preview', cites: [], media: [] }; }
+
   // ---- ids ----
   function nextId(prefix, taken) {
     var n = 1, set = {};
@@ -1040,7 +1243,7 @@ var TL = (function () {
   // ---- the project ----
   function blank() {
     return { app: 'OSINT Timeline Builder', format: FORMAT,
-      meta: { title: 'Untitled timeline', eyebrow: '', dek: '', byline: '', compiled: '', version: '', versionDate: '', versionNote: '', license: '' },
+      meta: { title: 'Untitled timeline', eyebrow: '', dek: '', byline: '', compiled: '', version: '', versionDate: '', versionNote: '', license: '' }, background: blankBackground(),
       threads: [{ id: 'main', name: 'Events', desc: '', color: 'blue' }], sources: [], events: [], disputes: [], gaps: [] };
   }
   // Reads anything that claims to be a project and returns a clean one plus a list of what was fixed.
@@ -1053,6 +1256,12 @@ var TL = (function () {
     var m = raw.meta || {};
     ['title', 'eyebrow', 'dek', 'byline', 'compiled', 'version', 'versionDate', 'versionNote', 'license'].forEach(function (k) { p.meta[k] = str(m[k], 2000); });
     if (!p.meta.title) p.meta.title = 'Untitled timeline';
+    var bg = raw.background && typeof raw.background === 'object' ? raw.background : {}, cseen = {};
+    p.background = { title: clean(bg.title) || 'Background', text: str(bg.text, 120000), display: bg.display === 'full' ? 'full' : 'preview',
+      cites: (Array.isArray(bg.cites) ? bg.cites : []).filter(function (c) { return c && typeof c === 'object'; }).map(function (c) {
+        var id = clean(c.id); if (!id || cseen[id]) id = nextId('b', Object.keys(cseen)); cseen[id] = 1;
+        return { id: id, src: clean(c.src), loc: str(c.loc, 400), quote: str(c.quote, 4000), note: str(c.note, 2000) };
+      }), media: mediaList(bg.media, 'm') };
     // threads
     p.threads = [];
     var tseen = {};
@@ -1090,7 +1299,7 @@ var TL = (function () {
         return { src: clean(c.src), loc: str(c.loc, 400), quote: str(c.quote, 4000), note: str(c.note, 2000) };
       });
       p.events.push({ id: id, date: date, end: normDate(e.end), prec: PREC[e.prec] ? e.prec : 'exact', thread: thread, key: !!e.key,
-        text: str(e.text != null ? e.text : e.event, 4000), actors: str(e.actors, 400), cites: cites, notes: str(e.notes, 4000) });
+        text: str(e.text != null ? e.text : e.event, 4000), actors: str(e.actors, 400), cites: cites, notes: str(e.notes, 4000), media: mediaList(e.media, 'm') });
     });
     if (!p.threads.length) p.threads = blank().threads;
     p.events.forEach(function (e) { if (!e.thread) e.thread = p.threads[0].id; });
@@ -1202,7 +1411,54 @@ var TL = (function () {
         else used[c.src] = (used[c.src] || 0) + 1;
         if (c.src && !clean(c.loc)) rows.push({ level: 'check', where: e.id, msg: 'Event ' + e.id + ', citation ' + (i + 1) + ' has no page, section, or timestamp.' });
       });
+      auditMedia(e.media, e.id, 'Event ' + e.id);
       if (e.prec === 'range' && e.end && sortKey(e.end) < sortKey(e.date)) rows.push({ level: 'fix', where: e.id, msg: 'Event ' + e.id + ' ends before it starts.' });
+    });
+    function useSrc(id, where, label) {
+      if (!id) return rows.push({ level: 'fix', where: where, msg: label + ' names no source.' });
+      if (!src[id]) return rows.push({ level: 'fix', where: where, msg: label + ' cites ' + id + ', which is not in the source list.' });
+      used[id] = (used[id] || 0) + 1;
+    }
+    function auditMedia(list, where, label) {
+      var locals = [];
+      (list || []).forEach(function (m, i) {
+        var lab = label + ', ' + ({ image: 'picture', compare: 'before-and-after', video: 'video', audio: 'sound', embed: 'embedded page' }[m.kind]) + ' ' + (m.id || i + 1);
+        if (!m.src || (m.kind === 'compare' && !m.src2)) rows.push({ level: 'fix', where: where, msg: lab + ' has no ' + (m.kind === 'video' ? 'video' : m.kind === 'audio' ? 'sound file' : m.kind === 'embed' ? 'page to embed' : m.kind === 'compare' ? 'pair of pictures' : 'picture') + '.' });
+        else if (m.kind === 'video' && !videoLink(m.src)) rows.push({ level: 'fix', where: where, msg: lab + ': the link is not one the tool can play. Use a YouTube, Vimeo or Internet Archive link, or an .mp4 or .webm file.' });
+        else if (m.kind === 'audio' && !audioLink(m.src)) rows.push({ level: 'fix', where: where, msg: lab + ': the link is not an .mp3, .m4a, .ogg or .wav file. For Spotify or SoundCloud, choose Embedded page.' });
+        else if (m.kind === 'embed' && !embedLink(m.src)) rows.push({ level: 'fix', where: where, msg: lab + ': an embedded page needs an address that starts with https://.' });
+        if (m.cite.src) useSrc(m.cite.src, where, lab);
+        else rows.push({ level: m.credit ? 'check' : 'fix', where: where, msg: lab + (m.credit ? ' credits its maker but cites no source. Cite where it came from, so readers can find the original.' : ' has no source or credit.') });
+        if ((m.kind === 'image' || m.kind === 'compare') && m.src && !clean(m.alt)) rows.push({ level: 'check', where: where, msg: lab + ' has no description for screen readers.' });
+        [m.kind !== 'embed' ? m.src : '', m.src2, m.poster].forEach(function (u) { if (isLocal(u) && locals.indexOf(u) < 0) locals.push(u); });
+      });
+      if (locals.length) rows.push({ level: 'check', where: where, msg: label + ' uses ' + (locals.length > 1 ? locals.length + ' files' : 'a file') + ' that must sit next to the published page: ' + locals.slice(0, 6).join(', ') + (locals.length > 6 ? ' and more' : '') + '.' });
+    }
+    // the background
+    var bg = p.background || blankBackground(), refs = bgRefs(bg.text), bgc = {}, bgm = {}, usedC = {}, usedM = {};
+    bg.cites.forEach(function (c) { bgc[c.id] = c; });
+    bg.media.forEach(function (m) { bgm[m.id] = m; });
+    refs.forEach(function (r) {
+      if (r.type === 'cite' && !r.src) { if (!bgc[r.id]) rows.push({ level: 'fix', where: 'background', msg: 'The background cites [^' + r.id + '], which is not in its list of citations.' }); else usedC[r.id] = 1; }
+      if (r.type === 'cite' && r.src) useSrc(r.src, 'background', 'The background');
+      if (r.type === 'event' && !ev[r.id]) rows.push({ level: 'fix', where: 'background', msg: 'The background links to [[' + r.id + ']], which is not an event.' });
+      if (r.type === 'media') { if (!bgm[r.id]) rows.push({ level: 'fix', where: 'background', msg: 'The background places {{' + r.id + '}}, which is not among its pictures and videos.' }); else usedM[r.id] = 1; }
+    });
+    bg.cites.forEach(function (c) {
+      useSrc(c.src, 'background', 'Background citation ' + c.id);
+      if (c.src && !clean(c.loc)) rows.push({ level: 'check', where: 'background', msg: 'Background citation ' + c.id + ' has no page, section, or timestamp.' });
+      if (!usedC[c.id]) rows.push({ level: 'check', where: 'background', msg: 'Background citation ' + c.id + ' is not placed in the text. Put [^' + c.id + '] after the passage it supports, or remove it.' });
+    });
+    auditMedia(bg.media, 'background', 'The background');
+    bg.media.forEach(function (m) { if (!usedM[m.id]) rows.push({ level: 'check', where: 'background', msg: 'Background ' + (m.kind === 'video' ? 'video' : 'picture') + ' ' + m.id + ' is not placed in the text. Put {{' + m.id + '}} on a line of its own.' }); });
+    // paragraphs with no citation
+    var paras = String(bg.text || '').replace(/\r/g, '').split(/\n\s*\n/), pn = 0;
+    paras.forEach(function (para) {
+      var t = para.trim(); if (!t || /^#{1,3}\s/.test(t) || RE_MEDIA.test(t) || /^(-{3,}|\*{3,})$/.test(t)) return;
+      pn++;
+      var words = t.replace(/\[[^\]]*\]/g, ' ').split(/\s+/).filter(Boolean).length;
+      RE_CITE.lastIndex = 0; RE_SRC.lastIndex = 0;
+      if (words >= 15 && !RE_CITE.test(t) && !RE_SRC.test(t)) rows.push({ level: 'check', where: 'background', msg: 'Background paragraph ' + pn + ' ("' + t.replace(/^[>#*\-\s]+/, '').slice(0, 50) + '…") has no citation.' });
     });
     p.disputes.forEach(function (d, i) {
       d.refs.forEach(function (r) { if (!ev[r]) rows.push({ level: 'fix', where: 'disputes', msg: 'Dispute "' + (d.title || i + 1) + '" points to ' + r + ', which is not an event.' }); });
@@ -1213,7 +1469,7 @@ var TL = (function () {
       if (r.empty) { rows.push({ level: 'fix', where: s.id, msg: 'Source ' + s.id + ' is empty.' }); return; }
       if (!r.rating && !st.ai) unrated++;
       r.checks.forEach(function (c) { if (c.level !== 'note') rows.push({ level: c.level, where: s.id, msg: 'Source ' + s.id + ': ' + c.msg }); });
-      if (!used[s.id]) rows.push({ level: 'check', where: s.id, msg: 'Source ' + s.id + ' is not cited by any event.' });
+      if (!used[s.id]) rows.push({ level: 'check', where: s.id, msg: 'Source ' + s.id + ' is not cited anywhere.' });
     });
     var order = { fix: 0, check: 1 };
     rows.sort(function (a, b) { return order[a.level] - order[b.level]; });
@@ -1222,7 +1478,8 @@ var TL = (function () {
 
   return { FORMAT: FORMAT, PALETTE: PALETTE, COLOR_NAMES: COLOR_NAMES, MONTHS: MONTHS, normDate: normDate, levelOf: levelOf, sortKey: sortKey, showDate: showDate, asDate: asDate, versionLabel: versionLabel, precLabel: precLabel,
     nextId: nextId, slug: slug, blank: blank, normalize: normalize, sortEvents: sortEvents, sourceState: sourceState, parseCSV: parseCSV, csvCell: csvCell, CSV_COLS: CSV_COLS,
-    fromCSV: fromCSV, toCSV: toCSV, audit: audit };
+    fromCSV: fromCSV, toCSV: toCSV, audit: audit, MEDIA_KINDS: MEDIA_KINDS, mediaSrc: mediaSrc, isLocal: isLocal, parseTime: parseTime, fmtTime: fmtTime, videoLink: videoLink, audioLink: audioLink, embedLink: embedLink,
+    mediaItem: mediaItem, mediaList: mediaList, bgRefs: bgRefs, bgNotes: bgNotes, blankBackground: blankBackground };
 })();
 </script>
 <script id="app">
@@ -1260,7 +1517,7 @@ var TL = (function () {
     else savedAt = saved.savedAt ? new Date(saved.savedAt) : null;
   } else load(boot.project || TL.blank(), true);
 
-  var ui = { mode: PUBLISHED ? 'view' : (boot.startIn || 'view'), etab: 'events', eid: null, sid: null, q: '', key: false, open: false, threads: null, zones: null, eq: '', sq: '' };
+  var ui = { mode: PUBLISHED ? 'view' : (boot.startIn || 'view'), etab: 'events', eid: null, sid: null, q: '', key: false, open: false, media: false, bgOpen: false, threads: null, zones: null, eq: '', sq: '', local: {} };
 
   // ---------- helpers ----------
   function threadOf(id) { for (var i = 0; i < P.threads.length; i++) if (P.threads[i].id === id) return P.threads[i]; return P.threads[0]; }
@@ -1285,7 +1542,7 @@ var TL = (function () {
   function touch() {
     fileDirty = true;
     clearTimeout(touch.t);
-    touch.t = setTimeout(function () { if (lsSet(STORE, JSON.stringify({ project: P, savedAt: new Date().toISOString() }))) savedAt = new Date(); status(); }, 400);
+    touch.t = setTimeout(function () { if (lsSet(STORE, JSON.stringify({ project: P, savedAt: new Date().toISOString() }))) savedAt = new Date(); else if (!touch.warned) { touch.warned = 1; toast('This timeline is too large to keep in the browser, often because of pictures kept inside it. Save it to a file.'); } status(); }, 400);
     status();
   }
   function status() {
@@ -1408,10 +1665,17 @@ var TL = (function () {
         var data = JSON.stringify({ mode: 'published', project: P }).replace(/</g, '\\u003c');
         var html = SELF.replace(/(<script type="application\/json" id="tl-data">)[\s\S]*?(<\/script>)/, function (_, a, b) { return a + data + b; });
         download('index.html', html, 'text/html');
+        var files = localFiles();
+        if (files.length) modal({ title: 'Put ' + (files.length > 1 ? 'these ' + files.length + ' files' : 'this file') + ' next to the page', body: '<p>The page shows or plays ' + (files.length > 1 ? 'them' : 'it') + ' from the folder it sits in. On GitHub Pages, upload ' + (files.length > 1 ? 'them' : 'it') + ' to the repository with these names, folders included:</p><ul>' + files.map(function (f) { return '<li><code>' + esc(f) + '</code></li>'; }).join('') + '</ul><p class="hint">GitHub takes files up to 100 MB, but pages load faster with video under about 25 MB. For anything longer, a YouTube, Vimeo or Internet Archive link is easier on readers.</p>', actions: [{ label: 'OK', primary: true }] });
       };
       if (issues.length) return modal({ title: issues.length + ' thing' + (issues.length > 1 ? 's' : '') + ' to fix before publishing', body: '<ul>' + issues.slice(0, 8).map(function (r) { return '<li>' + esc(r.msg) + '</li>'; }).join('') + (issues.length > 8 ? '<li>…and ' + (issues.length - 8) + ' more. See Edit → Check.</li>' : '') + '</ul>', actions: [{ label: 'Review in Check', fn: function () { ui.mode = 'edit'; ui.etab = 'audit'; render(); } }, { label: 'Export anyway', primary: true, fn: go }] });
       return go();
     }
+  }
+  function localFiles() {
+    var out = [], add = function (u) { if (u && TL.isLocal(u) && out.indexOf(u) < 0) out.push(u); }, each = function (list) { list.forEach(function (m) { if (m.kind !== 'embed') add(m.src); add(m.src2); add(m.poster); }); };
+    P.events.forEach(function (e) { each(e.media); }); each(P.background.media);
+    return out;
   }
   function askReplace(fn) {
     if (!P.events.length) return fn();
@@ -1456,12 +1720,183 @@ var TL = (function () {
     if (fresh) askReplace(go); else go();
   }
 
+  // ---------- Markdown, with the background's citation markers ----------
+  function inline(h) {
+    return h.replace(/`([^`]+)`/g, '<code>$1</code>').replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/(^|[^*])\*(?!\s)(.+?)\*/g, '$1<i>$2</i>')
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+  }
+  var MARKS = /\[\^([\w.-]{1,40})\]|\[@([\w.-]{1,40})(?:\s*,\s*([^\]\n]{1,200}))?\]|\[\[([\w.-]{1,40})(?:\|([^\]\n]{1,200}))?\]\]/g;
+  // A line of text with its markers turned into numbered note links and event links. ctx carries the numbering.
+  function rich(raw, ctx) {
+    var toks = [], lastCite = -1, t = String(raw).replace(MARKS, function (m, cid, sid, sloc, eid, elab, off) {
+      var h, joined = !eid && off === lastCite; if (!eid) lastCite = off + m.length;
+      if (eid) { var e = eventOf(eid); h = e ? '<a class="evlink" href="#ev-' + esc(eid) + '" data-j="' + esc(eid) + '" title="' + esc(TL.showDate(e.date) + ': ' + e.text.slice(0, 120)) + '">' + (elab ? inline(esc(elab)) : esc(e.date ? TL.showDate(e.date) : eid)) + '</a>' : '<span class="broken">' + esc(elab || eid) + '</span>'; }
+      else {
+        var key = cid ? cid : '@' + sid + '|' + String(sloc || '').replace(/\s+/g, ' ').trim(), n = ctx && ctx.num[key];
+        if (!n) h = '<sup class="fnref broken" title="No such citation">' + (joined ? ',' : '') + '?</sup>';
+        else { ctx.uses[n] = (ctx.uses[n] || 0) + 1; h = '<sup class="fnref">' + (joined ? '<span class="fnsep">,</span>' : '') + '<a href="#bn-' + n + '" id="br-' + n + '-' + ctx.uses[n] + '" data-bn="' + n + '" role="doc-noteref" aria-label="Source ' + n + '">' + n + '</a></sup>'; }
+      }
+      toks.push(h); return '\u0001' + (toks.length - 1) + '\u0002';
+    });
+    return inline(esc(t)).replace(/\u0001(\d+)\u0002/g, function (m, i) { return toks[+i]; });
+  }
+  var MD_LIST = /^\s*([-*•]|\d+[.)])\s+/, MD_HR = /^\s*(-{3,}|\*{3,})\s*$/, MD_HEAD = /^(#{1,3})\s+(.*)$/, MD_MEDIA = /^\s*\{\{([\w.-]{1,40})\}\}\s*$/;
+  function md(src, ctx) {
+    var lines = String(src || '').replace(/\r/g, '').split('\n'), out = [], i = 0, m;
+    while (i < lines.length) {
+      var l = lines[i];
+      if (!l.trim()) { i++; continue; }
+      if ((m = MD_MEDIA.exec(l))) { var it = ctx && ctx.media[m[1]]; out.push(it ? mediaHTML(it, 'bg') : '<p class="broken">Missing picture or video: ' + esc(m[1]) + '</p>'); i++; continue; }
+      if ((m = MD_HEAD.exec(l))) { var lv = m[1].length + 2; out.push('<h' + lv + '>' + rich(m[2], ctx) + '</h' + lv + '>'); i++; continue; }
+      if (MD_HR.test(l)) { out.push('<hr>'); i++; continue; }
+      if (/^\s*>/.test(l)) { var q = []; while (i < lines.length && /^\s*>/.test(lines[i])) q.push(lines[i++].replace(/^\s*>\s?/, '')); out.push('<blockquote>' + md(q.join('\n'), ctx) + '</blockquote>'); continue; }
+      if (MD_LIST.test(l)) {
+        var ol = /^\s*\d/.test(l), items = [];
+        while (i < lines.length && MD_LIST.test(lines[i])) { items.push(lines[i].replace(MD_LIST, '')); i++; while (i < lines.length && /^\s{2,}\S/.test(lines[i]) && !MD_LIST.test(lines[i])) { items[items.length - 1] += ' ' + lines[i].trim(); i++; } }
+        out.push('<' + (ol ? 'ol' : 'ul') + '>' + items.map(function (t) { return '<li>' + rich(t, ctx) + '</li>'; }).join('') + '</' + (ol ? 'ol' : 'ul') + '>'); continue;
+      }
+      var para = []; while (i < lines.length && lines[i].trim() && !MD_HEAD.test(lines[i]) && !/^\s*>/.test(lines[i]) && !MD_LIST.test(lines[i]) && !MD_HR.test(lines[i]) && !MD_MEDIA.test(lines[i])) para.push(lines[i++]);
+      out.push('<p>' + para.map(function (t) { return rich(t, ctx); }).join('<br>') + '</p>');
+    }
+    return out.join('');
+  }
+
+  // ---------- media ----------
+  function mres(u) { return (ui.local && ui.local[u]) || u; }
+  var KIND_NAMES = { image: 'Picture', compare: 'Before and after', video: 'Video', audio: 'Sound', embed: 'Embedded page' };
+  function imgTag(src, alt, cls, eager) { return '<img' + (cls ? ' class="' + cls + '"' : '') + ' src="' + esc(mres(src)) + '" alt="' + esc(alt || '') + '"' + (eager ? '' : ' loading="lazy"') + ' decoding="async" referrerpolicy="no-referrer">'; }
+  function mediaCap(m, lead, extra) {
+    var meta = [], s = m.cite && m.cite.src ? sourceOf(m.cite.src) : null;
+    if (m.date) meta.push(esc(TL.asDate(m.date)));
+    if (m.place) meta.push(esc(m.place));
+    if (m.credit) meta.push('<span class="cr">' + esc(m.credit) + '</span>');
+    var src = m.cite && m.cite.src ? '<details class="msrc"><summary>' + ({ image: 'Picture source', compare: 'Picture source', video: 'Video source', audio: 'Recording source', embed: 'Source' }[m.kind] || 'Source') + '</summary><div class="fn">' + (s ? fnHTML(s.fields, m.cite.loc) : '<span style="color:var(--fix)">Missing source ' + esc(m.cite.src) + '</span>') + '</div></details>' : '';
+    if (!m.cap && !meta.length && !src && !extra) return '';
+    return '<figcaption>' + (lead ? '<b class="mlead">' + esc(lead) + '</b> ' : '') + (m.cap ? '<span class="mcap">' + inline(esc(m.cap)) + '</span>' : '') + (meta.length ? '<span class="mmeta">' + meta.join('<i aria-hidden="true"> · </i>') + '</span>' : '') + (extra || '') + src + '</figcaption>';
+  }
+  function playURL(v, t) {
+    var s2 = t ? Math.floor(t) : 0;
+    if (v.host === 'youtube') return 'https://www.youtube-nocookie.com/embed/' + v.id + '?rel=0&playsinline=1&autoplay=1' + (s2 ? '&start=' + s2 : '');
+    if (v.host === 'vimeo') return 'https://player.vimeo.com/video/' + v.id + '?dnt=1&autoplay=1' + (v.hash ? '&h=' + v.hash : '') + (s2 ? '#t=' + s2 + 's' : '');
+    if (v.host === 'archive') return 'https://archive.org/embed/' + v.id + '?autoplay=1' + (s2 ? '&start=' + s2 : '');
+    return '';
+  }
+  function watchURL(v) { return v.host === 'youtube' ? 'https://www.youtube.com/watch?v=' + v.id : v.host === 'vimeo' ? 'https://vimeo.com/' + v.id + (v.hash ? '/' + v.hash : '') : v.host === 'archive' ? 'https://archive.org/details/' + v.id : v.url; }
+  function facade(play, title, note, poster, embed) {
+    return '<button type="button" class="mface" data-play="' + esc(play) + '"' + (embed ? ' data-embed="1"' : '') + ' data-title="' + esc(title) + '">' + (poster ? imgTag(poster, '', 'poster') : '') + '<span class="mplaybtn" aria-hidden="true"></span><span class="mface-t">' + esc(title) + '</span><span class="mface-n">' + esc(note) + '</span></button>';
+  }
+  function mediaHTML(m, group) {
+    var none = function (t) { return '<div class="mempty">' + esc(t) + '</div>'; }, k = m.kind;
+    if (k === 'image') {
+      if (!m.src) return none('A picture goes here.');
+      return '<figure class="mfig k-image"><button type="button" class="mzoom" aria-label="Enlarge the picture">' + imgTag(m.src, m.alt) + '</button>' + mediaCap(m) + '</figure>';
+    }
+    if (k === 'compare') {
+      if (!m.src || !m.src2) return none('Two pictures of one place go here: before, and after.');
+      var la = m.label || 'Before', lb = m.label2 || 'After';
+      return '<figure class="mfig k-compare"><div class="mcmp" style="--x:50%">' + imgTag(m.src2, m.alt, 'cmp-b') + '<div class="cmp-a">' + imgTag(m.src, m.alt) + '</div><div class="cmp-line" aria-hidden="true"><span class="cmp-knob">◂▸</span></div><span class="cmp-l l">' + esc(la) + '</span><span class="cmp-l r">' + esc(lb) + '</span><input type="range" class="cmp-range" min="0" max="100" step="0.5" value="50" aria-label="Slide between ' + esc(la) + ' and ' + esc(lb) + '"></div>' + mediaCap(m) + '</figure>';
+    }
+    if (k === 'video' || (k === 'embed' && TL.embedLink(m.src) && TL.embedLink(m.src).video)) {
+      var v = k === 'video' ? TL.videoLink(m.src) : TL.embedLink(m.src).video;
+      if (!v) return none(m.src ? 'This link is not a video the tool can play.' : 'A video goes here.');
+      var t = m.start != null ? m.start : v.start, box;
+      if (v.host === 'file') box = '<video controls preload="metadata" playsinline' + (m.poster ? ' poster="' + esc(mres(m.poster)) + '"' : '') + (m.alt ? ' aria-label="' + esc(m.alt) + '"' : '') + ' src="' + esc(mres(v.url)) + (t ? '#t=' + t : '') + '"></video>';
+      else box = facade(playURL(v, t), m.cap || 'Play the video', 'Plays from ' + v.label + '. Nothing loads from ' + v.label + ' until you press play.', m.poster);
+      var link = !TL.isLocal(m.src) ? '<a class="mopen" href="' + esc(watchURL(v)) + '" target="_blank" rel="noopener noreferrer">' + (v.host === 'file' ? 'Open the file' : 'Watch on ' + v.label) + ' ↗</a>' : '';
+      return '<figure class="mfig k-video"><div class="mplay">' + box + '</div>' + mediaCap(m, '', link) + '</figure>';
+    }
+    if (k === 'audio') {
+      var a = TL.audioLink(m.src); if (!a) return none(m.src ? 'This is not a sound file the tool can play.' : 'A sound file goes here.');
+      return '<figure class="mfig k-audio' + (m.poster ? ' has-art' : '') + '">' + (m.poster ? imgTag(m.poster, '', 'art') : '') + '<audio controls preload="metadata"' + (m.alt ? ' aria-label="' + esc(m.alt) + '"' : '') + ' src="' + esc(mres(a.url)) + (m.start ? '#t=' + m.start : '') + '"></audio>' + mediaCap(m) + '</figure>';
+    }
+    var e = TL.embedLink(m.src); if (!e) return none(m.src ? 'An embedded page needs an address that starts with https://.' : 'An embedded page goes here.');
+    var h = m.height || e.h || '';
+    return '<figure class="mfig k-embed"><div class="mplay membed" style="' + (h ? 'height:' + h + 'px' : 'aspect-ratio:16 / 9') + '">' + facade(e.url, m.cap || 'Show the embedded page', 'Loads from ' + e.host + '. Nothing loads from ' + e.host + ' until you press here.', '', true) + '</div>' + mediaCap(m, '', '<a class="mopen" href="' + esc(m.src) + '" target="_blank" rel="noopener noreferrer">Open on ' + esc(e.label) + ' ↗</a>') + '</figure>';
+  }
+  function evMediaHTML(e) {
+    if (!e.media || !e.media.length) return '';
+    var pics = e.media.filter(function (m) { return m.kind === 'image'; }).length;
+    return '<div class="evmedia' + (e.media.length === 1 ? ' one' : '') + (pics > 1 ? ' many' : '') + '" data-mg="' + esc(e.id) + '">' + e.media.map(function (m) { return mediaHTML(m, e.id); }).join('') + '</div>';
+  }
+  function mediaBadge(e) {
+    if (!e.media || !e.media.length) return '';
+    var n = {}; e.media.forEach(function (m) { var k = m.kind === 'compare' ? 'image' : m.kind === 'embed' ? 'embed' : m.kind; n[k] = (n[k] || 0) + 1; });
+    var w = { image: ['picture', 'pictures'], video: ['video', 'videos'], audio: ['recording', 'recordings'], embed: ['embed', 'embeds'] };
+    return '<span class="badge mb">' + Object.keys(n).map(function (k) { return n[k] + ' ' + w[k][n[k] > 1 ? 1 : 0]; }).join(', ') + '</span>';
+  }
+  // players load only when pressed
+  document.addEventListener('click', function (e) {
+    var f = e.target.closest && e.target.closest('.mface'); if (!f || f.closest('#eform .mprev-off')) return;
+    var u = f.getAttribute('data-play'), box = f.parentNode;
+    box.innerHTML = '<iframe src="' + esc(u) + '" title="' + esc(f.getAttribute('data-title') || 'Embedded content') + '" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture; fullscreen; clipboard-write"' + (f.hasAttribute('data-embed') ? ' sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"' : '') + '></iframe>';
+  });
+  document.addEventListener('input', function (e) { var r = e.target; if (!r.classList || !r.classList.contains('cmp-range')) return; var box = r.closest('.mcmp'); if (box) box.style.setProperty('--x', r.value + '%'); });
+  // the enlarged picture, with the other pictures of the same event or background a key press away
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('.mzoom'); if (!b) return;
+    var grp = b.closest('[data-mg]') || b.parentNode, all = Array.prototype.slice.call(grp.querySelectorAll('.mzoom')), pos = Math.max(0, all.indexOf(b));
+    var back = document.createElement('div'); back.className = 'mlb'; back.setAttribute('role', 'dialog'); back.setAttribute('aria-modal', 'true'); back.setAttribute('aria-label', 'Enlarged picture');
+    function draw() { var z = all[pos], im = z.querySelector('img'), cap = z.parentNode.querySelector('figcaption'); back.innerHTML = '<button type="button" class="mlb-x" aria-label="Close">×</button>' + (all.length > 1 ? '<button type="button" class="mlb-p" aria-label="Previous picture">‹</button><button type="button" class="mlb-n" aria-label="Next picture">›</button>' : '') + '<figure><img src="' + esc(im.getAttribute('src')) + '" alt="' + esc(im.getAttribute('alt')) + '">' + (cap || all.length > 1 ? '<figcaption>' + (all.length > 1 ? '<b class="mlead">' + (pos + 1) + ' / ' + all.length + '</b> ' : '') + (cap ? cap.innerHTML : '') + '</figcaption>' : '') + '</figure>'; back.querySelector('.mlb-x').focus(); }
+    function close() { back.remove(); document.removeEventListener('keydown', key, true); b.focus(); }
+    function key(ev) { if (ev.key === 'Escape') { ev.stopPropagation(); close(); } else if (ev.key === 'ArrowLeft' && all.length > 1) { pos = (pos - 1 + all.length) % all.length; draw(); } else if (ev.key === 'ArrowRight' && all.length > 1) { pos = (pos + 1) % all.length; draw(); } }
+    back.addEventListener('click', function (ev) { var t = ev.target; if (t === back || t.closest('.mlb-x')) return close(); if (t.closest('.mlb-p')) { pos = (pos - 1 + all.length) % all.length; draw(); } if (t.closest('.mlb-n')) { pos = (pos + 1) % all.length; draw(); } });
+    document.addEventListener('keydown', key, true); document.body.appendChild(back); draw();
+  });
+
+  // ---------- the background ----------
+  function bgCtx() {
+    var bg = P.background, n = TL.bgNotes(bg), media = {};
+    bg.media.forEach(function (m) { media[m.id] = m; });
+    return { num: n.num, order: n.order, uses: {}, media: media };
+  }
+  function noteHTML(o, n, ctx) {
+    var c = o.c, s = c ? sourceOf(c.src) : null, z = s ? zone(s.fields) : '', back = '';
+    for (var k = 1; k <= (ctx.uses[n] || 0); k++) back += ' <a class="bk" href="#br-' + n + '-' + k + '" data-back="br-' + n + '-' + k + '" aria-label="Back to the text' + (ctx.uses[n] > 1 ? ', place ' + k : '') + '">↩' + (ctx.uses[n] > 1 ? '<sup>' + k + '</sup>' : '') + '</a>';
+    return '<li id="bn-' + n + '" value="' + n + '"><div class="fn">' + (!c ? '<span style="color:var(--fix)">Missing citation [^' + esc(o.id) + ']</span>' : s ? fnHTML(s.fields, c.loc) : '<span style="color:var(--fix)">Missing source ' + esc(c.src) + '</span>') + back + '</div>' +
+      (z ? '<div class="tags"><span class="rate" style="--zc:' + ZC[z] + '">' + esc(s.fields.rating) + '</span><span>' + ZN[z] + ' zone</span></div>' : '') +
+      (c && c.quote ? '<blockquote>“' + esc(c.quote) + '”</blockquote>' : '') + (c && c.note ? '<div class="cnote">' + esc(c.note) + '</div>' : '') + '</li>';
+  }
+  function bgHTML(preview) {
+    var bg = P.background; if (!bg.text.trim()) return '';
+    var ctx = bgCtx(), body = md(bg.text, ctx), words = bg.text.split(/\s+/).length;
+    var long = !preview && bg.display !== 'full' && (words > 260 || bg.media.length > 1), open = ui.bgOpen || !long;
+    var notes = ctx.order.length ? '<section class="bg-notes" aria-labelledby="bgn-h"><h3 id="bgn-h">Sources for the background</h3><ol>' + ctx.order.map(function (o, i) { return noteHTML(o, i + 1, ctx); }).join('') + '</ol></section>' : '';
+    return '<section class="bg' + (open ? '' : ' shut') + '" id="background" aria-labelledby="bg-h" data-mg="bg"><h2 class="bg-h" id="bg-h">' + esc(bg.title) + '</h2><div class="bg-body"><div class="prose">' + body + '</div>' + notes + '</div>' +
+      (long ? '<button type="button" class="btn bg-more" id="bgMore" aria-expanded="' + open + '" aria-controls="background">' + (open ? 'Show less' : 'Continue reading · ' + Math.max(1, Math.round(words / 230)) + ' min') + '</button>' : '') + '</section>';
+  }
+  // a footnote number shows its source in a small box beside it
+  var pop = null;
+  function popClose() { if (pop) { pop.remove(); pop = null; } }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('.fnref a');
+    if (!a) { if (pop && !e.target.closest('.fnpop')) popClose(); return; }
+    e.preventDefault(); popClose();
+    var n = a.getAttribute('data-bn'), root = a.closest('#bgprev') || a.closest('#view') || document, li = root.querySelector('[id="bn-' + n + '"]'); if (!li) return;
+    ui.popRoot = root;
+    pop = document.createElement('div'); pop.className = 'fnpop'; pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', 'Source ' + n);
+    var inner = li.cloneNode(true); inner.querySelectorAll('.bk').forEach(function (x) { x.remove(); }); inner.removeAttribute('id');
+    pop.innerHTML = '<div class="fnpop-h"><b>Source ' + n + '</b><button type="button" class="btn small" data-popgo="' + n + '">All sources</button><button type="button" class="fnpop-x" aria-label="Close">×</button></div>' + inner.innerHTML;
+    document.body.appendChild(pop);
+    var r = a.getBoundingClientRect(), w = Math.min(420, innerWidth - 24), x = Math.max(12, Math.min(r.left - 20, innerWidth - w - 12)), below = r.bottom + 8 + pop.offsetHeight < innerHeight;
+    pop.style.width = w + 'px'; pop.style.left = x + 'px'; pop.style.top = (below ? r.bottom + 8 + scrollY : Math.max(scrollY + 8, r.top - 8 - pop.offsetHeight + scrollY)) + 'px';
+    pop.querySelector('.fnpop-x').focus();
+  });
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    if (t.closest && t.closest('.fnpop-x')) return popClose();
+    var g = t.closest && t.closest('[data-popgo]'); if (g) { var n = g.getAttribute('data-popgo'); popClose(); var li = (ui.popRoot || document).querySelector('[id="bn-' + n + '"]'); if (li) { li.scrollIntoView({ behavior: 'smooth', block: 'center' }); li.classList.add('flash'); setTimeout(function () { li.classList.remove('flash'); }, 1600); } return; }
+    var bk = t.closest && t.closest('[data-back]'); if (bk && bk.classList.contains('bk')) { e.preventDefault(); var to = (bk.closest('#bgprev') || bk.closest('#view') || document).querySelector('[id="' + bk.getAttribute('data-back') + '"]'); if (to) { to.scrollIntoView({ behavior: 'smooth', block: 'center' }); var p2 = to.closest('p, li, h3, h4, h5, blockquote') || to; p2.classList.add('flash'); setTimeout(function () { p2.classList.remove('flash'); }, 1600); to.focus(); } return; }
+    if (t.id === 'bgMore') { ui.bgOpen = !ui.bgOpen; var sec = $('background'); sec.classList.toggle('shut', !ui.bgOpen); t.setAttribute('aria-expanded', ui.bgOpen); var w = P.background.text.split(/\s+/).length; t.textContent = ui.bgOpen ? 'Show less' : 'Continue reading · ' + Math.max(1, Math.round(w / 230)) + ' min'; if (!ui.bgOpen) sec.scrollIntoView({ block: 'start' }); }
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && pop) popClose(); });
+
   // ---------- VIEW ----------
   function visible() {
     var q = ui.q.trim().toLowerCase(), words = q ? q.split(/\s+/) : [];
     return P.events.filter(function (e) {
       if (!ui.threads[e.thread]) return false;
       if (ui.key && !e.key) return false;
+      if (ui.media && !e.media.length) return false;
       if (ui.zonesOn) {
         var zs = e.cites.map(function (c) { var s = sourceOf(c.src); return (s && zone(s.fields)) || 'U'; });
         if (!zs.some(function (z) { return ui.zones[z]; })) return false;
@@ -1472,7 +1907,7 @@ var TL = (function () {
   }
   var hayCache = {};
   function hay(e) {
-    return (e.id + ' ' + e.text + ' ' + e.actors + ' ' + e.notes + ' ' + e.cites.map(function (c) { var s = sourceOf(c.src); return c.quote + ' ' + c.loc + ' ' + (s ? O.toPlain(built(s.fields, '').seg) : ''); }).join(' ')).toLowerCase();
+    return (e.id + ' ' + e.text + ' ' + e.actors + ' ' + e.notes + ' ' + e.media.map(function (m) { return m.cap + ' ' + m.credit + ' ' + m.place + ' ' + m.alt; }).join(' ') + ' ' + e.cites.map(function (c) { var s = sourceOf(c.src); return c.quote + ' ' + c.loc + ' ' + (s ? O.toPlain(built(s.fields, '').seg) : ''); }).join(' ')).toLowerCase();
   }
   function renderView() {
     if (ui.mode !== 'view') return;
@@ -1488,9 +1923,9 @@ var TL = (function () {
     $('view').innerHTML = '<div class="wrap gut"><header class="v-head">' + (m.eyebrow ? '<div class="eyebrow">' + esc(m.eyebrow) + '</div>' : '') +
       '<h1 class="v-title">' + esc(m.title) + '</h1>' + (m.dek ? '<p class="dek">' + esc(m.dek) + '</p>' : '') +
       '<div class="meta"><span><b>' + P.events.length + '</b> dated entries</span><span><b>' + P.events.filter(function (e) { return e.key; }).length + '</b> headline events</span><span><b>' + Object.keys(nsrc).length + '</b> sources cited</span>' + (span ? '<span>' + span + '</span>' : '') + (m.byline ? '<span>' + esc(m.byline) + '</span>' : '') + (m.compiled ? '<span>Compiled ' + esc(TL.showDate(TL.normDate(m.compiled) || '') === 'Undated' ? m.compiled : TL.showDate(TL.normDate(m.compiled))) + '</span>' : '') + (TL.versionLabel(m) ? '<span class="vtag"' + (m.versionNote ? ' title="' + esc(m.versionNote) + '"' : '') + '>' + esc(TL.versionLabel(m)) + '</span>' : '') + '</div></header>' +
-      (P.events.length ? '<section class="overview" aria-label="Overview"><h2>Overview · each dot is an entry; large dots are headline events. Select a dot to jump to it.</h2><div class="ov-scroll"><svg class="lanes" id="lanes" role="img" aria-label="Events by thread over time"></svg></div></section>' : '') +
+      bgHTML() + (P.events.length ? '<section class="overview" aria-label="Overview"><h2>Overview · each dot is an entry; large dots are headline events. Select a dot to jump to it.</h2><div class="ov-scroll"><svg class="lanes" id="lanes" role="img" aria-label="Events by thread over time"></svg></div></section>' : '') +
       '<div class="vbar" role="region" aria-label="Filters"><div class="row"><input id="vq" class="search" type="search" placeholder="Search events, people, sources, quotes" aria-label="Search" value="' + esc(ui.q) + '">' +
-      '<button class="btn toggle" id="vkey" aria-pressed="' + ui.key + '">Headline events only</button><button class="btn toggle" id="vopen" aria-pressed="' + ui.open + '">Show all sources</button></div>' +
+      '<button class="btn toggle" id="vkey" aria-pressed="' + ui.key + '">Headline events only</button>' + (P.events.some(function (e) { return e.media.length; }) ? '<button class="btn toggle" id="vmedia" aria-pressed="' + ui.media + '">With pictures or video</button>' : '') + '<button class="btn toggle" id="vopen" aria-pressed="' + ui.open + '">Show all sources</button></div>' +
       '<div class="row" id="vchips">' + P.threads.map(function (t) { return '<button class="chip" data-t="' + esc(t.id) + '" style="--c:' + colorVar(t) + '" aria-pressed="' + !!ui.threads[t.id] + '"><span class="sw"></span>' + esc(t.name) + ' <span class="n">' + P.events.filter(function (e) { return e.thread === t.id; }).length + '</span></button>'; }).join('') + '<span class="count" id="vcount"></span></div>' +
       (rated ? '<div class="row" id="vzones"><span class="hint">Source rating:</span>' + ['G', 'Y', 'O', 'R', 'X', 'U'].map(function (z) { return '<button class="chip zone" data-z="' + z + '" style="--zc:' + (ZC[z] || 'transparent') + '" aria-pressed="' + ui.zones[z] + '"><span class="sw"></span>' + ZN[z] + '</button>'; }).join('') + '</div>' : '') +
       '</div><div class="vgrid"><main id="ledger" aria-live="polite"></main><aside class="side">' + sideHTML(rated) + '</aside></div>' +
@@ -1548,14 +1983,14 @@ var TL = (function () {
         (c.quote ? '<blockquote>“' + esc(c.quote) + '”</blockquote>' : '') + (c.note ? '<div class="cnote">' + esc(c.note) + '</div>' : '') + '</div>';
     }).join('');
     return '<article class="ev' + (e.key ? ' key' : '') + '" id="ev-' + esc(e.id) + '" style="--c:' + colorVar(t) + '"><div class="date">' + esc(main) + (pl ? '<span class="p">' + esc(pl) + '</span>' : '') + '</div><div>' +
-      '<p class="txt">' + esc(e.text) + '</p><div class="tags"><span class="tag-thread">' + esc(t.name) + '</span>' + (e.actors ? '<span>' + esc(e.actors) + '</span>' : '') + (e.cites.length > 1 ? '<span class="badge">' + e.cites.length + ' sources</span>' : '') + '<span class="badge">' + esc(e.id) + '</span></div>' +
+      '<p class="txt">' + esc(e.text) + '</p><div class="tags"><span class="tag-thread">' + esc(t.name) + '</span>' + (e.actors ? '<span>' + esc(e.actors) + '</span>' : '') + (e.cites.length > 1 ? '<span class="badge">' + e.cites.length + ' sources</span>' : '') + mediaBadge(e) + '<span class="badge">' + esc(e.id) + '</span></div>' + evMediaHTML(e) +
       (e.cites.length || e.notes ? '<details class="src"' + (ui.open ? ' open' : '') + '><summary>' + (e.cites.length === 1 ? 'Source' : 'Sources') + (e.notes ? ' & notes' : '') + '</summary><div class="cites">' + cites + '</div>' + (e.notes ? '<div class="notes"><b>Notes:</b> ' + esc(e.notes) + '</div>' : '') + '</details>' : '') +
       '</div></article>';
   }
   function jump(id) {
     var e = eventOf(id); if (!e) return toast('No event ' + id);
     if (ui.mode !== 'view') { ui.mode = 'view'; render(); }
-    if (!visible().some(function (x) { return x.id === id; })) { ui.threads[e.thread] = true; ui.key = false; ui.q = ''; ui.zones = null; renderView(); }
+    if (!visible().some(function (x) { return x.id === id; })) { ui.threads[e.thread] = true; ui.key = false; ui.media = false; ui.q = ''; ui.zones = null; renderView(); }
     var el = $('ev-' + id); if (!el) return;
     el.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
     el.classList.add('flash'); setTimeout(function () { el.classList.remove('flash'); }, 1600);
@@ -1566,6 +2001,7 @@ var TL = (function () {
     var c = e.target.closest('#vchips .chip'); if (c) { var t = c.dataset.t; if (e.altKey) { Object.keys(ui.threads).forEach(function (k) { ui.threads[k] = k === t; }); } else ui.threads[t] = !ui.threads[t]; document.querySelectorAll('#vchips .chip').forEach(function (b) { b.setAttribute('aria-pressed', !!ui.threads[b.dataset.t]); }); return ledger(); }
     var z = e.target.closest('#vzones .chip'); if (z) { ui.zones[z.dataset.z] = !ui.zones[z.dataset.z]; z.setAttribute('aria-pressed', ui.zones[z.dataset.z]); ui.zonesOn = Object.keys(ui.zones).some(function (k) { return !ui.zones[k]; }); return ledger(); }
     if (e.target.id === 'vkey') { ui.key = !ui.key; e.target.setAttribute('aria-pressed', ui.key); return ledger(); }
+    if (e.target.id === 'vmedia') { ui.media = !ui.media; e.target.setAttribute('aria-pressed', ui.media); return ledger(); }
     if (e.target.id === 'vopen') { ui.open = !ui.open; e.target.setAttribute('aria-pressed', ui.open); document.querySelectorAll('details.src').forEach(function (d) { d.open = ui.open; }); }
   });
   var vqT; document.addEventListener('input', function (e) { if (e.target.id === 'vq') { clearTimeout(vqT); vqT = setTimeout(function () { ui.q = e.target.value; ledger(); }, 140); } });
@@ -1573,9 +2009,9 @@ var TL = (function () {
   // ---------- EDIT ----------
   function renderEdit() {
     if (ui.mode !== 'edit') return;
-    var tabs = [['events', 'Events', P.events.length], ['sources', 'Sources', P.sources.length], ['threads', 'Threads', P.threads.length], ['disputes', 'Disputes & gaps', P.disputes.length + P.gaps.length], ['page', 'Page', ''], ['audit', 'Check', '']];
-    $('edit').innerHTML = '<div class="wrap gut"><div class="etabs" role="tablist">' + tabs.map(function (t) { return '<button role="tab" data-etab="' + t[0] + '" aria-selected="' + (ui.etab === t[0]) + '">' + t[1] + (t[2] !== '' ? '<span class="n">' + t[2] + '</span>' : '') + '</button>'; }).join('') + '</div><div id="epane"></div></div>';
-    ({ events: edEvents, sources: edSources, threads: edThreads, disputes: edDisputes, page: edPage, audit: edAudit })[ui.etab]();
+    var tabs = [['events', 'Events', P.events.length], ['background', 'Background', P.background.text.trim() ? '' : ''], ['sources', 'Sources', P.sources.length], ['threads', 'Threads', P.threads.length], ['disputes', 'Disputes & gaps', P.disputes.length + P.gaps.length], ['page', 'Page', ''], ['audit', 'Check', '']];
+    $('edit').innerHTML = '<input type="file" id="mFile" accept="image/png,image/jpeg,image/webp,image/gif" hidden><input type="file" id="mAV" accept="video/*,audio/*" hidden><div class="wrap gut"><div class="etabs" role="tablist">' + tabs.map(function (t) { return '<button role="tab" data-etab="' + t[0] + '" aria-selected="' + (ui.etab === t[0]) + '">' + t[1] + (t[2] !== '' ? '<span class="n">' + t[2] + '</span>' : '') + '</button>'; }).join('') + '</div><div id="epane"></div></div>';
+    ({ events: edEvents, background: edBackground, sources: edSources, threads: edThreads, disputes: edDisputes, page: edPage, audit: edAudit })[ui.etab]();
   }
   document.addEventListener('click', function (e) { var t = e.target.closest('[data-etab]'); if (t) { ui.etab = t.dataset.etab; renderEdit(); } });
 
@@ -1584,7 +2020,7 @@ var TL = (function () {
     var q = ui.eq.toLowerCase();
     return P.events.filter(function (e) { return !q || (e.id + ' ' + e.date + ' ' + e.text + ' ' + e.actors).toLowerCase().indexOf(q) !== -1; }).map(function (e) {
       var t = threadOf(e.thread), bad = !e.cites.length || e.cites.some(function (c) { return !sourceOf(c.src); });
-      return '<button class="li" data-eid="' + esc(e.id) + '" aria-current="' + (ui.eid === e.id) + '" style="--c:' + colorVar(t) + '"><span class="sw"></span><span><span class="l1">' + (e.key ? '★ ' : '') + esc(e.text || '(no text yet)') + '</span><span class="l2"><span>' + esc(e.date || 'undated') + '</span><span>' + esc(e.id) + '</span><span>' + e.cites.length + ' cit.</span>' + (bad ? '<span class="warn">needs source</span>' : '') + '</span></span></button>';
+      return '<button class="li" data-eid="' + esc(e.id) + '" aria-current="' + (ui.eid === e.id) + '" style="--c:' + colorVar(t) + '"><span class="sw"></span><span><span class="l1">' + (e.key ? '★ ' : '') + esc(e.text || '(no text yet)') + '</span><span class="l2"><span>' + esc(e.date || 'undated') + '</span><span>' + esc(e.id) + '</span><span>' + e.cites.length + ' cit.</span>' + (e.media.length ? '<span>' + e.media.length + ' media</span>' : '') + (bad ? '<span class="warn">needs source</span>' : '') + '</span></span></button>';
     }).join('') || '<p class="hint" style="padding:12px">No events match.</p>';
   }
   function edEvents() {
@@ -1611,9 +2047,107 @@ var TL = (function () {
           '<label class="field"><span>Quote</span><textarea data-cf="quote" rows="2" placeholder="The passage this entry rests on, word for word">' + esc(c.quote) + '</textarea></label>' +
           '<div class="preview" data-prev="' + i + '">' + (s ? fnHTML(s.fields, c.loc) : '<span style="color:var(--muted)">Pick a source to see the footnote.</span>') + '</div></div>';
       }).join('') + '</div><div class="row" style="margin-top:8px"><button class="btn" id="addCite">Add citation</button><button class="btn" id="newSrcForEv">New source…</button></div></fieldset>' +
+      '<fieldset><legend>Pictures and video</legend>' + mediaEditor(e.media, 'ev') + '<div class="row" style="margin-top:8px">' + addMediaButtons('ev') + '</div>' + (e.media.length ? '<div class="hint" style="margin-top:10px">Preview</div><div id="mprev" data-mg="prev">' + evMediaHTML(e) + '</div>' : '') + '</fieldset>' +
       '<label class="field wide"><span>Notes</span><textarea id="f-notes" rows="2" placeholder="Conflicts with other sources, doubts, how a date was worked out">' + esc(e.notes) + '</textarea></label>' +
       '<div class="actions"><div class="row"><button class="btn" id="dupEv">Duplicate</button><button class="btn" data-j="' + esc(e.id) + '">See it in View</button></div><button class="btn danger" id="delEv">Delete event</button></div></div>';
   }
+  // ---- the media editor, for events and the background ----
+  function addMediaButtons(ms) { return [['image', 'Add a picture'], ['compare', 'Before and after'], ['video', 'Add a video'], ['audio', 'Add sound'], ['embed', 'Embed a page']].map(function (k) { return '<button type="button" class="btn small" data-madd="' + k[0] + '" data-ms="' + ms + '">' + k[1] + '</button>'; }).join(''); }
+  function mediaListOf(ms) { if (ms === 'bg') return P.background.media; var e = eventOf(ui.eid); return e ? e.media : null; }
+  function srcPick(sel) { return '<option value="">No source yet</option>' + P.sources.map(function (s2) { return '<option value="' + esc(s2.id) + '"' + (s2.id === sel ? ' selected' : '') + '>' + esc(shortLabel(s2)) + '</option>'; }).join('') + (sel && !sourceOf(sel) ? '<option value="' + esc(sel) + '" selected>Missing: ' + esc(sel) + '</option>' : ''); }
+  function mf(ms, i, k, v, ph, extra) { return '<input data-ms="' + ms + '" data-mi="' + i + '" data-mf="' + k + '" value="' + esc(v == null ? '' : v) + '" placeholder="' + esc(ph || '') + '"' + (extra || '') + '>'; }
+  function fieldM(label, inner, help, wide) { return '<label class="field' + (wide ? ' wide' : '') + '"><span>' + label + '</span>' + inner + (help ? '<small>' + help + '</small>' : '') + '</label>'; }
+  function mediaEditor(list, ms) {
+    if (!list.length) return '<p class="hint">' + (ms === 'bg' ? 'No pictures or video in the background yet. Use <b>Insert picture or video</b> above the text to place one.' : 'None yet. Pictures, before-and-after pairs, video, sound and embedded pages appear under the event, each with its own credit and source.') + '</p>';
+    return '<div class="mitems">' + list.map(function (m, i) {
+      var k = m.kind, pic = k === 'image' || k === 'compare', av = k === 'video' || k === 'audio', d = function (u) { return /^data:/.test(u || '') ? '' : u; }, local = TL.isLocal(m.src) && k !== 'embed' ? m.src : '';
+      var help = pic ? 'Choose a file from this computer (kept inside the timeline, shrunk to 1600 pixels wide), a link (https://…), or the name of a file that will sit next to the published page (media/strike.jpg).' : k === 'video' ? 'A YouTube, Vimeo or Internet Archive link, an .mp4 or .webm link, or a file next to the published page (media/clip.mp4).' : k === 'audio' ? 'An .mp3, .m4a, .ogg or .wav link, or a file next to the published page (media/call.mp3).' : 'The page\'s address. Share links from Datawrapper, Flourish, Spotify, SoundCloud, YouTube and Vimeo become their embeds; published Google Sheets, Docs and Slides work too.';
+      var srcRow = fieldM(k === 'compare' ? 'Before' : pic ? 'Picture' : k === 'video' ? 'Video' : k === 'audio' ? 'Sound' : 'Page to embed', '<div class="row nowrap">' + mf(ms, i, 'src', d(m.src), /^data:/.test(m.src) ? 'Kept inside the timeline' : pic ? 'https://… or media/picture.jpg' : k === 'embed' ? 'https://…' : 'https://… or media/clip.mp4', ' class="grow"') + (pic ? '<button type="button" class="btn small" data-mpick="src" data-ms="' + ms + '" data-mi="' + i + '">Choose…</button>' : av ? '<button type="button" class="btn small" data-mpick="src" data-ms="' + ms + '" data-mi="' + i + '" title="Play a copy from this computer while you edit">Preview a file…</button>' : '') + '</div>' + (local ? '<small class="mlocal">' + (ui.local[local] ? 'Previewing your copy. ' : '') + 'Put this file at <code>' + esc(local) + '</code> next to the published page.</small>' : ''), help, true);
+      var src2 = k === 'compare' ? fieldM('After', '<div class="row nowrap">' + mf(ms, i, 'src2', d(m.src2), /^data:/.test(m.src2) ? 'Kept inside the timeline' : 'https://… or media/after.jpg', ' class="grow"') + '<button type="button" class="btn small" data-mpick="src2" data-ms="' + ms + '" data-mi="' + i + '">Choose…</button></div>', 'The same view at the same size as the first, or the slider will not line them up.', true) +
+        '<div class="fgrid">' + fieldM('Label on the first', mf(ms, i, 'label', m.label, 'Before · 1 Jun')) + fieldM('Label on the second', mf(ms, i, 'label2', m.label2, 'After · 4 Jun')) + '</div>' : '';
+      var thumbs = (pic && m.src ? imgTag(m.src, '', 'thumb', true) : '') + (k === 'compare' && m.src2 ? imgTag(m.src2, '', 'thumb', true) : '');
+      return '<div class="mitem" data-mrow="' + i + '"><div class="mi-head"><select data-ms="' + ms + '" data-mi="' + i + '" data-mf="kind" aria-label="Kind">' + TL.MEDIA_KINDS.map(function (x) { return '<option value="' + x + '"' + (x === k ? ' selected' : '') + '>' + KIND_NAMES[x] + '</option>'; }).join('') + '</select>' +
+        (ms === 'bg' ? '<code class="mid">{{' + esc(m.id) + '}}</code><button type="button" class="btn small" data-mplace="' + i + '" title="Put it in the text where the cursor was">Place in the text</button>' : '') + '<span class="sp"></span>' +
+        '<button type="button" class="btn small" data-mmove="-1" data-ms="' + ms + '" data-mi="' + i + '" aria-label="Earlier"' + (i ? '' : ' disabled') + '>↑</button><button type="button" class="btn small" data-mmove="1" data-ms="' + ms + '" data-mi="' + i + '" aria-label="Later"' + (i < list.length - 1 ? '' : ' disabled') + '>↓</button><button type="button" class="btn small danger" data-mdel data-ms="' + ms + '" data-mi="' + i + '">Remove</button></div>' +
+        (thumbs ? '<div class="mthumbs">' + thumbs + '</div>' : '') + srcRow + src2 +
+        '<div class="fgrid">' + (k !== 'embed' ? fieldM('Describe it for screen readers', mf(ms, i, 'alt', m.alt, pic ? 'What the picture shows' : 'What the recording is')) : '') + fieldM('Caption', mf(ms, i, 'cap', m.cap, pic ? 'Smoke over the depot, looking north' : 'What it shows, and why it matters')) + '</div>' +
+        '<div class="fgrid">' + fieldM('Credit', mf(ms, i, 'credit', m.credit, 'Maxar Technologies; @user on X')) + fieldM(av ? 'Recorded' : 'Taken', mf(ms, i, 'date', m.date, '2022-06-02, or Summer 2022')) + fieldM('Place', mf(ms, i, 'place', m.place, 'Kherson, Ukraine; 46.64, 32.61')) + '</div>' +
+        (av || (k === 'embed' && TL.embedLink(m.src) && TL.embedLink(m.src).video) ? '<div class="fgrid">' + fieldM(k === 'audio' ? 'Cover picture' : 'Still shown before it plays', '<div class="row nowrap">' + mf(ms, i, 'poster', d(m.poster), /^data:/.test(m.poster) ? 'Kept inside the timeline' : 'Optional: https://… or media/still.jpg', ' class="grow"') + '<button type="button" class="btn small" data-mpick="poster" data-ms="' + ms + '" data-mi="' + i + '">Choose…</button></div>') + fieldM('Start at', mf(ms, i, 'start', m.start != null ? TL.fmtTime(m.start) : '', '0:00'), 'Minutes and seconds, such as 1:25.') + '</div>' : '') +
+        (k === 'embed' ? '<div class="fgrid">' + fieldM('Height', mf(ms, i, 'height', m.height, 'Automatic', ' type="number" min="120" max="1600" step="10"'), 'Pixels, for players and charts that need a set height.') + '</div>' : '') +
+        '<div class="fgrid">' + fieldM('Source', '<select data-ms="' + ms + '" data-mi="' + i + '" data-mf="cite.src">' + srcPick(m.cite.src) + '</select>') + fieldM('Locator', mf(ms, i, 'cite.loc', m.cite.loc, 'Frame at 0:42; post of 3 Jun 2022')) + '</div></div>';
+    }).join('') + '</div>';
+  }
+  function setMedia(m, k, v, el) {
+    if (k === 'cite.src') m.cite.src = v; else if (k === 'cite.loc') m.cite.loc = v;
+    else if (k === 'src' || k === 'src2' || k === 'poster') { var ok = TL.mediaSrc(v, (m.kind === 'video' || m.kind === 'audio') && k === 'src' ? 'av' : ''); m[k] = ok || (m.kind === 'embed' && k === 'src' ? v.trim() : ''); if (el) el.classList.toggle('bad', !!v.trim() && !m[k]); }
+    else if (k === 'start') m.start = TL.parseTime(v);
+    else if (k === 'height') m.height = +v >= 120 && +v <= 1600 ? Math.round(+v) : '';
+    else m[k] = v;
+  }
+  function readPicture(file, done, fail) {
+    fail = fail || function () {};
+    if (!/^image\//.test(file.type)) { toast('Choose a PNG, JPEG, WebP or GIF picture.'); return fail(); }
+    var r = new FileReader();
+    r.onload = function () {
+      var im = new Image();
+      im.onload = function () {
+        var k = Math.min(1, 1600 / im.naturalWidth), w = Math.round(im.naturalWidth * k), h = Math.round(im.naturalHeight * k);
+        if (k === 1 && file.size < 400000) return done(String(r.result));
+        var cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.getContext('2d').drawImage(im, 0, 0, w, h);
+        done(cv.toDataURL(file.type === 'image/png' && file.size < 1500000 ? 'image/png' : 'image/jpeg', 0.86));
+      };
+      im.onerror = function () { toast('That picture could not be read.'); fail(); };
+      im.src = String(r.result);
+    };
+    r.readAsDataURL(file);
+  }
+  function mediaRedraw(ms) { if (ms === 'bg') { edBackground(); } else { eventForm(); refreshEventRow(); } }
+  function mediaPreview(ms) {
+    clearTimeout(mediaPreview.t);
+    mediaPreview.t = setTimeout(function () { if (ms === 'bg') return bgPreview(); var e = eventOf(ui.eid), box = $('mprev'); if (e && box) box.innerHTML = evMediaHTML(e); }, 250);
+  }
+  document.addEventListener('input', function (ev) {
+    var t = ev.target; if (ui.mode !== 'edit' || !t.dataset || t.dataset.mi == null || !t.dataset.mf || t.tagName !== 'INPUT') return;
+    var list = mediaListOf(t.dataset.ms), m = list && list[+t.dataset.mi]; if (!m) return;
+    if (t.dataset.mf === 'start') return;
+    setMedia(m, t.dataset.mf, t.value, t); touch(); mediaPreview(t.dataset.ms);
+  });
+  document.addEventListener('change', function (ev) {
+    var t = ev.target; if (ui.mode !== 'edit') return;
+    if (t.id === 'mFile' && t.files[0]) { var tg = ui.mtarget, f = t.files[0]; t.value = ''; return readPicture(f, function (url) { var l = mediaListOf(tg.ms), m = l && l[tg.i]; if (!m) return; m[tg.k] = url; touch(); mediaRedraw(tg.ms); }); }
+    if (t.id === 'mAV' && t.files[0]) {
+      var tg2 = ui.mtarget, f2 = t.files[0], l2 = mediaListOf(tg2.ms), m2 = l2 && l2[tg2.i]; t.value = ''; if (!m2) return;
+      var path = TL.isLocal(m2.src) ? m2.src : 'media/' + f2.name.replace(/[^\w.\-()~+]+/g, '-');
+      try { if (ui.local[path]) URL.revokeObjectURL(ui.local[path]); ui.local[path] = URL.createObjectURL(f2); } catch (e) { return toast('That file could not be read.'); }
+      m2.src = path; touch(); mediaRedraw(tg2.ms); return toast('Previewing ' + f2.name + '. Put it at ' + path + ' next to the published page.');
+    }
+    if (!t.dataset || t.dataset.mi == null || !t.dataset.mf) return;
+    var list = mediaListOf(t.dataset.ms), m = list && list[+t.dataset.mi]; if (!m) return;
+    if (t.dataset.mf === 'kind') { m.kind = t.value; var fresh = TL.mediaItem(m, m.id); Object.keys(fresh).forEach(function (k) { m[k] = fresh[k]; }); touch(); return mediaRedraw(t.dataset.ms); }
+    if (t.dataset.mf === 'start') { setMedia(m, 'start', t.value); t.value = m.start != null ? TL.fmtTime(m.start) : ''; touch(); return mediaPreview(t.dataset.ms); }
+    setMedia(m, t.dataset.mf, t.value, t); touch();
+    if (t.tagName === 'SELECT' || t.dataset.mf === 'src') return mediaRedraw(t.dataset.ms);
+  });
+  document.addEventListener('click', function (ev) {
+    var t = ev.target, b; if (ui.mode !== 'edit') return;
+    if ((b = t.closest('[data-madd]'))) {
+      var ms = b.dataset.ms, list = mediaListOf(ms); if (!list) return;
+      var m = TL.mediaItem({ kind: b.dataset.madd }, TL.nextId('m', list.map(function (x) { return x.id; })));
+      list.push(m); touch();
+      if (ms === 'bg') { insertAtCursor('\n\n{{' + m.id + '}}\n\n'); }
+      mediaRedraw(ms);
+      var rows = document.querySelectorAll('[data-mrow]'); if (rows.length) rows[rows.length - 1].scrollIntoView({ block: 'nearest' });
+      return;
+    }
+    if ((b = t.closest('[data-mpick]'))) { var l0 = mediaListOf(b.dataset.ms), m0 = l0 && l0[+b.dataset.mi]; if (!m0) return; ui.mtarget = { ms: b.dataset.ms, i: +b.dataset.mi, k: b.dataset.mpick }; return $((m0.kind === 'video' || m0.kind === 'audio') && b.dataset.mpick === 'src' ? 'mAV' : 'mFile').click(); }
+    if ((b = t.closest('[data-mmove]'))) { var l1 = mediaListOf(b.dataset.ms), a1 = +b.dataset.mi, b1 = a1 + +b.dataset.mmove; if (!l1 || b1 < 0 || b1 >= l1.length) return; var x = l1[a1]; l1[a1] = l1[b1]; l1[b1] = x; touch(); return mediaRedraw(b.dataset.ms); }
+    if ((b = t.closest('[data-mdel]'))) {
+      var l2 = mediaListOf(b.dataset.ms), i2 = +b.dataset.mi, m2 = l2 && l2[i2]; if (!m2) return;
+      l2.splice(i2, 1);
+      if (b.dataset.ms === 'bg') P.background.text = P.background.text.replace(new RegExp('\\n?[ \\t]*\\{\\{' + m2.id.replace(/[.\-]/g, '\\$&') + '\\}\\}[ \\t]*\\n?', 'g'), '\n');
+      touch(); return mediaRedraw(b.dataset.ms);
+    }
+  });
   function refreshEventRow() { var l = $('elist'); if (l) { var sc = l.scrollTop; l.innerHTML = eventList(); l.scrollTop = sc; } }
   document.addEventListener('input', function (ev) {
     if (ui.mode !== 'edit') return;
@@ -1648,7 +2182,7 @@ var TL = (function () {
     if (li) { ui.eid = li.dataset.eid; document.querySelectorAll('#elist .li').forEach(function (b) { b.setAttribute('aria-current', b.dataset.eid === ui.eid); }); eventForm(); return; }
     var e = eventOf(ui.eid);
     if (t.id === 'addEv') {
-      var last = P.events[P.events.length - 1], ne = { id: TL.nextId('e', P.events.map(function (x) { return x.id; })), date: '', end: '', prec: 'exact', thread: last ? last.thread : P.threads[0].id, key: false, text: '', actors: '', cites: [{ src: '', loc: '', quote: '' }], notes: '' };
+      var last = P.events[P.events.length - 1], ne = { id: TL.nextId('e', P.events.map(function (x) { return x.id; })), date: '', end: '', prec: 'exact', thread: last ? last.thread : P.threads[0].id, key: false, text: '', actors: '', cites: [{ src: '', loc: '', quote: '' }], notes: '', media: [] };
       P.events.push(ne); ui.eid = ne.id; ui.eq = ''; touch(); edEvents(); $('f-date').focus(); return;
     }
     if (!e) return;
@@ -1662,9 +2196,89 @@ var TL = (function () {
     if (t.id === 'newSrcForEv') { var s = newSource(); var empty = e.cites.filter(function (c) { return !c.src; })[0]; if (empty) empty.src = s.id; else e.cites.push({ src: s.id, loc: '', quote: '' }); ui.returnTo = e.id; ui.etab = 'sources'; touch(); renderEdit(); return; }
   });
 
+  // --- background ---
+  function edBackground() {
+    var bg = P.background, n = TL.bgNotes(bg), used = {};
+    TL.bgRefs(bg.text).forEach(function (r) { if (r.type === 'cite' && !r.src) used[r.id] = (used[r.id] || 0) + 1; });
+    var srcOpt = function (sel) { return srcPick(sel).replace('No source yet', 'Choose a source…'); };
+    var keepTop = $('bgText') ? { s: $('bgText').selectionStart, e: $('bgText').selectionEnd, y: $('bgText').scrollTop } : null;
+    $('epane').innerHTML = '<div class="bged"><div class="form bgform" id="bgf"><h2>Background</h2><p class="hint">A longer introduction shown above the timeline: what happened before, who is involved, why it matters. Put a citation after each passage it supports, so a reader can check it.</p>' +
+      '<div class="fgrid">' + fieldM('Heading', '<input id="bgTitle" value="' + esc(bg.title) + '" placeholder="Background">') + fieldM('Show it', '<select id="bgDisplay"><option value="preview"' + (bg.display !== 'full' ? ' selected' : '') + '>The opening, with Continue reading</option><option value="full"' + (bg.display === 'full' ? ' selected' : '') + '>All of it</option></select>', 'Long backgrounds open with their first lines so the timeline stays in view.') + '</div>' +
+      '<div class="field wide"><span>Text</span><div class="mdbar" role="toolbar" aria-label="Formatting"><button type="button" class="btn small" data-mdw="**" title="Bold"><b>B</b></button><button type="button" class="btn small" data-mdw="*" title="Italic"><i>I</i></button><button type="button" class="btn small" data-mdl="## " title="Heading">Heading</button><button type="button" class="btn small" data-mdl="- " title="Bulleted list">• List</button><button type="button" class="btn small" data-mdl="> " title="Quote">❝ Quote</button><button type="button" class="btn small" id="mdLink" title="Link to a web page">Link</button>' +
+      '<span class="sep"></span><button type="button" class="btn small primary" id="bgCite">Cite a source…</button><button type="button" class="btn small" id="bgEvLink">Link an event…</button><button type="button" class="btn small" id="bgMedia">Insert picture or video…</button></div>' +
+      '<textarea id="bgText" rows="18" spellcheck="true" placeholder="## How it started\nWrite in paragraphs, with a blank line between them. Put the cursor after a sentence and press Cite a source.">' + esc(bg.text) + '</textarea>' +
+      '<small>Markdown: ## heading, - list, > quote, **bold**, *italic*, [link](https://…). Citations show as [^b1], links to events as [[e12]], pictures and video as {{m1}} on a line of their own. You can also type [@s3, p. 5] to cite source s3 at page 5 directly.</small></div>' +
+      '<fieldset><legend>Citations in the background</legend>' + (bg.cites.length ? '<div class="dlist">' + bg.cites.map(function (c, i) {
+        var s2 = sourceOf(c.src), num = n.num[c.id];
+        return '<div class="citeed" data-bci="' + i + '"><div class="top bgtop"><code class="mid" title="' + (num ? 'Shown as note ' + num : 'Not placed in the text') + '">' + (num ? num + ' · ' : '') + '[^' + esc(c.id) + ']</code><label class="field"><span>Source</span><select data-bcf="src">' + srcOpt(c.src) + '</select></label><label class="field"><span>Locator</span><input data-bcf="loc" value="' + esc(c.loc) + '" placeholder="p. 5, para. 3, 12:30"></label><div class="row"><button type="button" class="btn small" data-bcplace="' + i + '">Place at cursor</button><button type="button" class="btn small danger" data-bcdel="' + i + '">Remove</button></div></div>' +
+          '<label class="field"><span>Quote</span><textarea data-bcf="quote" rows="2" placeholder="The passage this rests on, word for word">' + esc(c.quote) + '</textarea></label>' + '<label class="field"><span>Note</span><input data-bcf="note" value="' + esc(c.note) + '" placeholder="Optional: a caveat, or how a figure was worked out"></label>' +
+          '<div class="preview" data-bprev="' + i + '">' + (s2 ? fnHTML(s2.fields, c.loc) : '<span style="color:var(--muted)">Pick a source to see the footnote.</span>') + '</div>' + (used[c.id] ? '' : '<small class="mlocal">Not placed in the text yet.</small>') + '</div>';
+      }).join('') + '</div>' : '<p class="hint">None yet. Put the cursor in the text where a citation belongs and press <b>Cite a source</b>.</p>') + '</fieldset>' +
+      '<fieldset><legend>Pictures and video in the background</legend>' + mediaEditor(bg.media, 'bg') + '</fieldset>' +
+      '</div><div class="bgprev-col"><div class="hint" style="margin-bottom:6px">Preview</div><div id="bgprev" class="bgprev"></div></div></div>';
+    if (keepTop) { var ta = $('bgText'); ta.scrollTop = keepTop.y; ui.bgSel = [keepTop.s, keepTop.e]; }
+    bgPreview();
+  }
+  function bgPreview() { var b = $('bgprev'); if (!b) return; b.innerHTML = P.background.text.trim() ? bgHTML(true) : '<p class="hint">The background appears here as you write it.</p>'; }
+  function bgSel() { var ta = $('bgText'); if (!ta) return [0, 0]; if (document.activeElement === ta || !ui.bgSel) return [ta.selectionStart, ta.selectionEnd]; return ui.bgSel; }
+  function insertAtCursor(txt, replaceSel) {
+    var bg = P.background, se = bgSel(), a = se[0], b = replaceSel ? se[1] : se[0], v = bg.text;
+    if (a > v.length) a = b = v.length;
+    if (/^\[\^|^\[@/.test(txt)) { while (a > 0 && /[ \t]/.test(v[a - 1]) && a === b) { a--; b--; } }
+    bg.text = v.slice(0, a) + txt + v.slice(b); ui.bgSel = [a + txt.length, a + txt.length]; touch();
+    var ta = $('bgText'); if (ta) { ta.value = bg.text; ta.focus(); ta.setSelectionRange(a + txt.length, a + txt.length); }
+  }
+  function wrapSel(ta, before, after) { var a = ta.selectionStart, b = ta.selectionEnd, v = ta.value, sel = v.slice(a, b) || 'text'; ta.value = v.slice(0, a) + before + sel + after + v.slice(b); ta.focus(); ta.setSelectionRange(a + before.length, a + before.length + sel.length); ta.dispatchEvent(new Event('input', { bubbles: true })); }
+  function prefixLines(ta, pre) { var a = ta.selectionStart, b = ta.selectionEnd, v = ta.value, s0 = v.lastIndexOf('\n', a - 1) + 1, e0 = v.indexOf('\n', b); if (e0 < 0) e0 = v.length; var block = v.slice(s0, e0).split('\n').map(function (l) { return pre + l; }).join('\n'); ta.value = v.slice(0, s0) + block + v.slice(e0); ta.focus(); ta.setSelectionRange(s0, s0 + block.length); ta.dispatchEvent(new Event('input', { bubbles: true })); }
+  document.addEventListener('focusout', function (ev) { if (ev.target.id === 'bgText') ui.bgSel = [ev.target.selectionStart, ev.target.selectionEnd]; });
+  document.addEventListener('input', function (ev) {
+    if (ui.mode !== 'edit' || ui.etab !== 'background') return; var t = ev.target, bg = P.background;
+    if (t.id === 'bgText') { bg.text = t.value; touch(); clearTimeout(bgPreview.t); bgPreview.t = setTimeout(bgPreview, 300); return; }
+    if (t.id === 'bgTitle') { bg.title = t.value; touch(); return bgPreview(); }
+    var row = t.closest('[data-bci]'); if (row && t.dataset.bcf) { var c = bg.cites[+row.dataset.bci]; c[t.dataset.bcf] = t.value; touch(); var s2 = sourceOf(c.src); row.querySelector('[data-bprev]').innerHTML = s2 ? fnHTML(s2.fields, c.loc) : ''; clearTimeout(bgPreview.t); bgPreview.t = setTimeout(bgPreview, 300); }
+  });
+  document.addEventListener('change', function (ev) {
+    if (ui.mode !== 'edit' || ui.etab !== 'background') return; var t = ev.target, bg = P.background;
+    if (t.id === 'bgDisplay') { bg.display = t.value; touch(); return; }
+    if (t.id === 'bgText') return bgPreview();
+    var row = t.closest('[data-bci]'); if (row && t.dataset.bcf === 'src') { bg.cites[+row.dataset.bci].src = t.value; touch(); edBackground(); }
+  });
+  document.addEventListener('click', function (ev) {
+    if (ui.mode !== 'edit' || ui.etab !== 'background') return; var t = ev.target, b, ta = $('bgText'), bg = P.background;
+    if (ta && (b = t.closest('[data-mdw]'))) return wrapSel(ta, b.dataset.mdw, b.dataset.mdw);
+    if (ta && (b = t.closest('[data-mdl]'))) return prefixLines(ta, b.dataset.mdl);
+    if (ta && t.id === 'mdLink') return modal({ title: 'Link to a web page', body: '<label class="field"><span>Address</span><input id="lnkIn" placeholder="https://…"></label>', actions: [{ label: 'Cancel' }, { label: 'Add link', primary: true, fn: function (m) { var u = m.querySelector('#lnkIn').value.trim(); if (!/^https?:\/\/\S+$/.test(u)) { toast('Start the address with https://'); return false; } var se = ui.bgSel || [ta.value.length, ta.value.length]; ta.setSelectionRange(se[0], se[1]); wrapSel(ta, '[', '](' + u + ')'); } }] });
+    if (t.id === 'bgCite') {
+      ui.bgSel = bgSel();
+      if (!P.sources.length) return modal({ title: 'No sources yet', body: '<p>Add the source under <b>Sources</b> first, or open a source list from the Citation Generator. Then come back and cite it.</p>', actions: [{ label: 'Go to Sources', primary: true, fn: function () { ui.etab = 'sources'; renderEdit(); } }, { label: 'Cancel' }] });
+      return modal({ title: 'Cite a source here', body: '<label class="field"><span>Source</span><select id="ciSrc" class="inp">' + srcPick('').replace('No source yet', 'Choose a source…') + '</select></label><label class="field"><span>Locator</span><input id="ciLoc" class="inp" placeholder="p. 5, para. 3, 12:30"></label><label class="field"><span>Quote</span><textarea id="ciQuote" class="inp" rows="3" placeholder="Optional: the passage this rests on, word for word"></textarea></label><p class="hint">The note number goes in at the cursor. Readers press it to see the full footnote and the quote.</p>',
+        actions: [{ label: 'Cancel' }, { label: 'Insert citation', primary: true, fn: function (m) { var sid = m.querySelector('#ciSrc').value; if (!sid) { toast('Choose a source'); return false; } var c = { id: TL.nextId('b', bg.cites.map(function (x) { return x.id; })), src: sid, loc: m.querySelector('#ciLoc').value.trim(), quote: m.querySelector('#ciQuote').value.trim(), note: '' }; bg.cites.push(c); insertAtCursor('[^' + c.id + ']'); edBackground(); } }] });
+    }
+    if (t.id === 'bgEvLink') {
+      ui.bgSel = bgSel(); var se = ui.bgSel, selText = bg.text.slice(se[0], se[1]);
+      if (!P.events.length) return toast('There are no events to link to yet.');
+      return modal({ title: 'Link to an event', body: '<label class="field"><span>Event</span><select id="elSel" class="inp">' + P.events.map(function (e) { return '<option value="' + esc(e.id) + '">' + esc((e.date ? TL.showDate(e.date) : 'Undated') + ' · ' + e.text.slice(0, 90)) + '</option>'; }).join('') + '</select></label><label class="field"><span>Words to link</span><input id="elLab" class="inp" value="' + esc(selText) + '" placeholder="Leave empty to show the event\'s date"></label><p class="hint">Readers press the link to jump to the event in the timeline below.</p>',
+        actions: [{ label: 'Cancel' }, { label: 'Insert link', primary: true, fn: function (m) { var id = m.querySelector('#elSel').value, lab = m.querySelector('#elLab').value.trim().replace(/[\]|]/g, ''); insertAtCursor('[[' + id + (lab ? '|' + lab : '') + ']]', !!selText); bgPreview(); } }] });
+    }
+    if (t.id === 'bgMedia') {
+      ui.bgSel = bgSel();
+      return modal({ title: 'Insert a picture or video', body: '<label class="field"><span>Kind</span><select id="miKind" class="inp">' + TL.MEDIA_KINDS.map(function (k) { return '<option value="' + k + '">' + KIND_NAMES[k] + '</option>'; }).join('') + '</select></label><p class="hint">It goes in at the cursor, on a line of its own. Fill in the picture or link, credit and source below the text.</p>',
+        actions: [{ label: 'Cancel' }, { label: 'Insert', primary: true, fn: function (m) { var it = TL.mediaItem({ kind: m.querySelector('#miKind').value }, TL.nextId('m', bg.media.map(function (x) { return x.id; }))); bg.media.push(it); insertAtCursor('\n\n{{' + it.id + '}}\n\n'); edBackground(); var rows = document.querySelectorAll('[data-mrow]'); if (rows.length) rows[rows.length - 1].scrollIntoView({ block: 'center' }); } }] });
+    }
+    if ((b = t.closest('[data-bcplace]'))) { var c = bg.cites[+b.dataset.bcplace]; insertAtCursor('[^' + c.id + ']'); return edBackground(); }
+    if ((b = t.closest('[data-mplace]'))) { var it = bg.media[+b.dataset.mplace]; insertAtCursor('\n\n{{' + it.id + '}}\n\n'); return edBackground(); }
+    if ((b = t.closest('[data-bcdel]'))) { var c2 = bg.cites[+b.dataset.bcdel]; bg.cites.splice(+b.dataset.bcdel, 1); bg.text = bg.text.split('[^' + c2.id + ']').join(''); touch(); return edBackground(); }
+  });
+
   // --- sources ---
   function newSource() { var s = { id: TL.nextId('s', P.sources.map(function (x) { return x.id; })), fields: { type: 'web', titleStyle: 'quotes', access: [], quals: [] } }; P.sources.push(s); ui.sid = s.id; return s; }
-  function useCount(id) { var n = 0; P.events.forEach(function (e) { e.cites.forEach(function (c) { if (c.src === id) n++; }); }); return n; }
+  function useCount(id) {
+    var n = 0, m = function (list) { list.forEach(function (x) { if (x.cite && x.cite.src === id) n++; }); };
+    P.events.forEach(function (e) { e.cites.forEach(function (c) { if (c.src === id) n++; }); m(e.media); });
+    P.background.cites.forEach(function (c) { if (c.src === id) n++; }); m(P.background.media);
+    TL.bgRefs(P.background.text).forEach(function (r) { if (r.src === id) n++; });
+    return n;
+  }
   function sourceListHTML() {
     var q = ui.sq.toLowerCase();
     return P.sources.filter(function (s) { return !q || (s.id + ' ' + O.toPlain(built(s.fields, '').seg) + ' ' + (s.fields.file || '')).toLowerCase().indexOf(q) !== -1; }).map(function (s) {
@@ -1820,7 +2434,7 @@ var TL = (function () {
   function edAudit() {
     var a = TL.audit(P, O, TYPES, TEXT_KEYS), fix = a.rows.filter(function (r) { return r.level === 'fix'; }).length;
     $('epane').innerHTML = '<div class="form" style="margin-block:16px 60px"><h2>Check the timeline</h2><p class="hint">' + a.events + ' events, ' + a.sources + ' sources. ' + (a.rows.length ? fix + ' to fix, ' + (a.rows.length - fix) + ' to check.' : '<span class="ok">Nothing to fix.</span>') + (a.unrated ? ' ' + a.unrated + ' source' + (a.unrated > 1 ? 's are' : ' is') + ' unrated; ratings are optional but expected on any source a reader might question.' : '') + '</p>' +
-      '<div class="audit">' + a.rows.slice(0, 400).map(function (r) { return '<div class="item ' + r.level + '"><span class="lvl">' + r.level + '</span><span>' + esc(r.msg) + '</span>' + (eventOf(r.where) ? '<button class="btn small" data-goev="' + esc(r.where) + '">Open</button>' : sourceOf(r.where) ? '<button class="btn small" data-gosrc="' + esc(r.where) + '">Open</button>' : '<span></span>') + '</div>'; }).join('') + (a.rows.length > 400 ? '<p class="hint">…and ' + (a.rows.length - 400) + ' more.</p>' : '') + '</div></div>';
+      '<div class="audit">' + a.rows.slice(0, 400).map(function (r) { return '<div class="item ' + r.level + '"><span class="lvl">' + r.level + '</span><span>' + esc(r.msg) + '</span>' + (eventOf(r.where) ? '<button class="btn small" data-goev="' + esc(r.where) + '">Open</button>' : r.where === 'background' ? '<button class="btn small" data-etab="background">Open</button>' : sourceOf(r.where) ? '<button class="btn small" data-gosrc="' + esc(r.where) + '">Open</button>' : '<span></span>') + '</div>'; }).join('') + (a.rows.length > 400 ? '<p class="hint">…and ' + (a.rows.length - 400) + ' more.</p>' : '') + '</div></div>';
   }
   document.addEventListener('click', function (ev) {
     var g = ev.target.closest('[data-goev]'); if (g) { ui.eid = g.dataset.goev; ui.etab = 'events'; ui.eq = ''; return renderEdit(); }
@@ -1831,7 +2445,8 @@ var TL = (function () {
   function render() {
     document.title = P.meta.title + (PUBLISHED ? '' : ' · OSINT Timeline Builder');
     renderBar();
-    $('view').hidden = ui.mode !== 'view'; $('edit').hidden = ui.mode !== 'edit';
+    $('view').hidden = ui.mode !== 'view'; $('edit').hidden = ui.mode !== 'edit'; popClose();
+    if (ui.mode === 'view') $('edit').innerHTML = ''; else $('view').innerHTML = '';
     if (ui.mode === 'view') { ui.threads = ui.threads || null; renderView(); } else renderEdit();
   }
   window.addEventListener('beforeunload', function (e) { if (!PUBLISHED && fileDirty && !savedAt) { e.preventDefault(); e.returnValue = ''; } });

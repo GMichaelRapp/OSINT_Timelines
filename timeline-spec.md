@@ -2,7 +2,7 @@
 
 This file tells an AI assistant how to turn a set of documents into a timeline file that the OSINT Timeline Builder can open. Give it to your assistant along with the documents, or point the assistant at this address, and ask for a timeline file.
 
-It matches format 1 of the OSINT Timeline Builder. Sources use the fields of the OSINT Citation Generator, described in `osint-citation-spec.md` in the OSINT_Cites repository: https://github.com/gmichaelrapp/OSINT_Cites
+It matches format 2 of the OSINT Timeline Builder (version 1.2), which adds the background and media. The tool still opens format 1 files. Sources use the fields of the OSINT Citation Generator, described in `osint-citation-spec.md` in the OSINT_Cites repository: https://github.com/gmichaelrapp/OSINT_Cites
 
 The point of a timeline is that a reader can check every entry. An entry that cannot be traced to a page and a passage has failed, however well it reads.
 
@@ -23,7 +23,7 @@ A timeline file is JSON:
 ```json
 {
   "app": "OSINT Timeline Builder",
-  "format": 1,
+  "format": 2,
   "meta": {
     "title": "Silk Road Takedown Timeline",
     "eyebrow": "Case file · United States v. Ulbricht, 14-cr-68 (S.D.N.Y.)",
@@ -81,6 +81,45 @@ A timeline file is JSON:
 
 The values above are placeholders that show the form. Replace every one of them with what your documents say.
 
+## The background
+
+`background` is an optional longer introduction shown above the timeline: what came before, who is involved, why it matters. Write it only from the material you were given, and cite every passage that states a fact.
+
+```json
+"background": {
+  "title": "Background",
+  "display": "preview",
+  "text": "Silk Road opened in early 2011.[^b1] Agents arrested its operator in a San Francisco library ([[e214|1 October 2013]]).[@s4, p. 12]\n\n{{m1}}",
+  "cites": [ { "id": "b1", "src": "s1", "loc": "p. 3", "quote": "The word-for-word passage", "note": "" } ],
+  "media": [ { "id": "m1", "kind": "image", "src": "https://…", "alt": "…", "cap": "…", "credit": "…", "cite": { "src": "s2", "loc": "…" } } ]
+}
+```
+
+- `text` is Markdown: paragraphs separated by a blank line, `## headings`, `- lists`, `> quotes`, `**bold**`, `*italic*`, `[links](https://…)`.
+- Put a citation right after the sentence or clause it supports. `[^b1]` points to an entry in `cites`, which can carry a `quote`; prefer it. `[@s4, p. 12]` cites source `s4` at that locator directly, with no quote.
+- `[[e214]]` links to an event and shows its date; `[[e214|the arrest]]` shows those words. Use the event's real `id`.
+- A line holding only `{{m1}}` places an entry from `media` there.
+- `display` is `preview` (the opening, with Continue reading) or `full`.
+- Every paragraph that states facts needs at least one citation. The tool's Check tab flags long paragraphs without one.
+
+## Media
+
+Events and the background can carry `media`: pictures, before-and-after pairs, video, sound, and embedded pages.
+
+| Field | Holds |
+|---|---|
+| `id` | A short ID unique within its list: `m1`, `m2` |
+| `kind` | `image`, `compare` (two pictures of one place, with a slider), `video`, `audio`, or `embed` |
+| `src` | An `https://` address, or the path of a file that will sit next to the published page (`media/clip.mp4`). Video: a YouTube, Vimeo or Internet Archive link, or an `.mp4` or `.webm` file. Sound: `.mp3`, `.m4a`, `.ogg` or `.wav`. Embed: the page's address |
+| `src2`, `label`, `label2` | For `compare`: the second picture, and the labels on each (`1 Jun`, `4 Jun`) |
+| `alt` | What the picture shows, for screen readers |
+| `cap`, `credit`, `date`, `place` | Caption; who made it; when and where it was taken or recorded, as the source states them |
+| `poster`, `start` | For video and sound: a still or cover picture, and the start time in seconds |
+| `height` | For an embed: its height in pixels |
+| `cite` | `{ "src": "s2", "loc": "frame at 0:42" }`: the source the media comes from |
+
+Use only media you were given, at the addresses you were given. Never guess a video ID or a picture's address, and never describe a picture you have not seen: write `alt` from what the person tells you, or leave it empty. Every item needs a `credit` and, wherever the person has it, a `cite`. If a date or place comes from your own geolocation or reasoning, say so in the event's `notes`.
+
 ## Page details
 
 `compiled` is the date the timeline was first put together. The three version fields are optional and are kept separate from it, so a reader can tell which revision of a published timeline they are reading:
@@ -107,6 +146,7 @@ For a new timeline, use `1.0` and set `versionDate` to the same day as `compiled
 | `actors` | People and organizations, separated by semicolons |
 | `cites` | One or more citations: `src` (a source `id`), `loc` (the locator), `quote` (word for word), and optionally `note` |
 | `notes` | Conflicts with other sources, doubts, and how a date was worked out |
+| `media` | Optional pictures, video and sound for this event. See **Media** above |
 
 Date an event by when it happened, not by when a document reported it. A trial on 21 January 2015 that describes an arrest on 1 October 2013 gives an event dated 2013-10-01, cited to the transcript.
 
